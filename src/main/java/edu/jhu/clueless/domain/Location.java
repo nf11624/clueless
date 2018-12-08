@@ -30,6 +30,11 @@ public abstract class Location
     
   };
   
+  public Location(int[][] position) 
+  {
+    this.position = position;
+  };
+  
   /**
    * 
    *  Constructor using arguments 

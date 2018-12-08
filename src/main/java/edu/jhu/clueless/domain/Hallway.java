@@ -17,6 +17,11 @@ public class Hallway extends Location
   {
     super();
   }
+  
+  public Hallway(int[][] position)
+  {
+    super(position);
+  }
 
   public Hallway(Set<Location> connectedLocation,
       Set<Player> occupyingPlayers, boolean isOccupied, int[][] position)
