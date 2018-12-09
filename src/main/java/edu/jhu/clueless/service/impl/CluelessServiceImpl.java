@@ -6,6 +6,9 @@ package edu.jhu.clueless.service.impl;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.json.JSONException;
@@ -102,12 +105,12 @@ public class CluelessServiceImpl implements CluelessService
   /*
    * Initialize Players
    */
-   private static Player missScarlet = new Player("missScarlet");
-   private static Player profPlum = new Player("profPlum");
-   private static Player colMustard = new Player("colMustard");
-   private static Player mrsPeacock = new Player("mrsPeacock");
-   private static Player mrGreen = new Player("mrGreen");
-   private static Player mrsWhite = new Player("mrsWhite");
+   private static Player missScarlet = new Player("missScarlet", null);
+   private static Player profPlum = new Player("profPlum", null);
+   private static Player colMustard = new Player("colMustard", null);
+   private static Player mrsPeacock = new Player("mrsPeacock", null);
+   private static Player mrGreen = new Player("mrGreen", null);
+   private static Player mrsWhite = new Player("mrsWhite", null);
    
    private static Map<Integer, Player> playerMapping;
    private static Map<Pair, Location> locationMapping = new HashMap<>();

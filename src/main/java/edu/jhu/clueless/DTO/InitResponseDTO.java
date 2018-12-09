@@ -132,7 +132,7 @@ public class InitResponseDTO
   }
 
   public String toString() {
-	  return message;
+	  return statusMessage;
   }
   
   

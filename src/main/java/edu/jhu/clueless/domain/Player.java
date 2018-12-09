@@ -3,6 +3,8 @@
  */
 package edu.jhu.clueless.domain;
 
+import java.util.Set;
+
 /**
  * @author davidbess
  *
