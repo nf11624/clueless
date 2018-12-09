@@ -9,7 +9,7 @@ import java.util.Set;
  * @author davidbess
  *
  */
-public abstract class Location
+public abstract class Location extends Card
 {
   protected Set<Location> connectedLocation;
   protected Set<Player> occupyingPlayers;
