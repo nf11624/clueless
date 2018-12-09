@@ -9,6 +9,7 @@ import edu.jhu.clueless.DTO.EndTurnRequestDTO;
 import edu.jhu.clueless.DTO.EndTurnResponseDTO;
 import edu.jhu.clueless.DTO.InitRequestDTO;
 import edu.jhu.clueless.DTO.InitResponseDTO;
+import edu.jhu.clueless.DTO.LegalMovesDTO;
 import edu.jhu.clueless.DTO.MoveRequestDTO;
 import edu.jhu.clueless.DTO.MoveResponseDTO;
 import edu.jhu.clueless.DTO.SuggestRequestDTO;
@@ -30,5 +31,7 @@ public interface CluelessService {
     AccuseResponseDTO accuse(AccuseRequestDTO myAccuseRequestDTO) throws IOException, JSONException;
     
     SuggestResponseDTO suggest(SuggestRequestDTO mySuggestRequestDTO) throws IOException, JSONException;
+    
+    public LegalMovesDTO getLegalMoves(Integer player);
 
 }

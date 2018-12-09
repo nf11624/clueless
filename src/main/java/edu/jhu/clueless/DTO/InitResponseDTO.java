@@ -131,6 +131,9 @@ public class InitResponseDTO
     this.mrGreen = mrGreen;
   }
 
+  public String toString() {
+	  return statusMessage;
+  }
   
   
 }
