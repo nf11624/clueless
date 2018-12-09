@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.json.JSONException;
+import org.springframework.stereotype.Component;
 
 import edu.jhu.clueless.DTO.AccuseRequestDTO;
 import edu.jhu.clueless.DTO.AccuseResponseDTO;
@@ -30,6 +31,7 @@ import edu.jhu.clueless.service.CluelessService;
  * @author davidbess
  *
  */
+@Component
 public class CluelessServiceImpl implements CluelessService
 {
   
@@ -211,7 +213,7 @@ public class CluelessServiceImpl implements CluelessService
 
     InitResponseDTO myInitResponseDTO = new InitResponseDTO();
     
-    myInitResponseDTO.setMessage("Successful");
+    myInitResponseDTO.setMessage("Initialization of " + myInitRequestDTO.getGameName() + " Successful\n");
     
     return myInitResponseDTO;
   }

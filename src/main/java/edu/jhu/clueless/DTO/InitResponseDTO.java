@@ -35,6 +35,9 @@ public class InitResponseDTO
     this.message = message;
   }
 
+  public String toString() {
+	  return message;
+  }
   
   
 }

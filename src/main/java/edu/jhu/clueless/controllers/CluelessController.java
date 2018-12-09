@@ -7,9 +7,11 @@ import java.io.IOException;
 
 import org.json.JSONException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.jhu.clueless.DTO.AccuseRequestDTO;
@@ -22,14 +24,11 @@ import edu.jhu.clueless.DTO.MoveRequestDTO;
 import edu.jhu.clueless.DTO.MoveResponseDTO;
 import edu.jhu.clueless.DTO.SuggestRequestDTO;
 import edu.jhu.clueless.DTO.SuggestResponseDTO;
-import edu.jhu.clueless.domain.ConfidentialFile;
-import edu.jhu.clueless.domain.Hallway;
-import edu.jhu.clueless.domain.Player;
-import edu.jhu.clueless.domain.Room;
 import edu.jhu.clueless.service.CluelessService;
 
 @RestController
-@RequestMapping("${application.base-path}/api")
+@CrossOrigin(origins = "*")
+//@RequestMapping("/api")
 public class CluelessController 
 {
     private final CluelessService myCluelessService;
@@ -48,13 +47,20 @@ public class CluelessController
      * @throws IOException
      * @throws JSONException
      */
-    @PostMapping("/init")
-    ResponseEntity<InitResponseDTO> initGame(@RequestBody InitRequestDTO myInitRequestDTO) throws IOException, JSONException 
+    @RequestMapping(method = {RequestMethod.GET}, path = {"/init"})
+//    ResponseEntity<InitResponseDTO> initGame(@RequestBody InitRequestDTO myInitRequestDTO) throws IOException, JSONException
+    public String initGame() throws JSONException, IOException
     {
-      InitResponseDTO result = myCluelessService.initGame(myInitRequestDTO);
-      return ResponseEntity.ok().body(result);
+      InitResponseDTO result = myCluelessService.initGame(new InitRequestDTO("TEST"));
+      return ResponseEntity.ok().body(result).toString();
     }
-    
+  
+    @PostMapping("/init")
+    ResponseEntity<InitResponseDTO> initGame(InitRequestDTO myInitRequestDTO) throws IOException, JSONException 
+    {
+        InitResponseDTO result = myCluelessService.initGame(myInitRequestDTO);
+        return ResponseEntity.ok().body(result);
+    }
     
     @PostMapping("/move")
     ResponseEntity<MoveResponseDTO> move(@RequestBody MoveRequestDTO myMoveRequestDTO) throws IOException, JSONException 
