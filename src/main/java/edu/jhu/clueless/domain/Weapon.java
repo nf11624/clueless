@@ -7,7 +7,7 @@ package edu.jhu.clueless.domain;
  * @author davidbess
  *
  */
-public class Weapon
+public class Weapon extends Card
 {
   private String weaponName;
 
