@@ -12,6 +12,17 @@ public class ConfidentialFile
   private Room murderLocation;
   private Player murderingPlayer;
   private Weapon murderWeapon;
+  
+  
+  public ConfidentialFile() {};
+  
+  public ConfidentialFile(Room murderLocation, Player murderingPlayer,
+      Weapon murderWeapon)
+  {
+    this.murderLocation = murderLocation;
+    this.murderingPlayer = murderingPlayer;
+    this.murderWeapon = murderWeapon;
+  }
   /**
    * @return the murderLocation
    */

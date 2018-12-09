@@ -19,6 +19,12 @@ public class Room extends Location
     super();
   }
   
+  public Room(int[][] position)
+  {
+    super(position);
+  }
+  
+  
   public Room(Set<Location> connectedLocation, Set<Player> occupyingPlayers,
       boolean isOccupied, int[][] position, String roomName)
   {
