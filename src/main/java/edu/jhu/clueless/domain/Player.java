@@ -10,6 +10,7 @@ package edu.jhu.clueless.domain;
 public class Player
 {
   private String playerName;
+  private Location location;
 
   /**
    * No arg constructor
@@ -55,6 +56,14 @@ public class Player
     return "Player [playerName=" + playerName + "]";
   }
 
+  public Location getLocation() {
+	  return location;
+  }
+  
+  public void setLocation(Location location) {
+	  this.location = location;
+  }
+  
   /* (non-Javadoc)
    * @see java.lang.Object#hashCode()
    */

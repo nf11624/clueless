@@ -3,7 +3,6 @@
  */
 package edu.jhu.clueless.domain;
 
-import java.util.Arrays;
 import java.util.Set;
 
 /**
@@ -18,13 +17,13 @@ public class Hallway extends Location
     super();
   }
   
-  public Hallway(int[][] position)
+  public Hallway(Pair position)
   {
     super(position);
   }
 
   public Hallway(Set<Location> connectedLocation,
-      Set<Player> occupyingPlayers, boolean isOccupied, int[][] position)
+      Set<Player> occupyingPlayers, boolean isOccupied, Pair position)
   {
     super(connectedLocation, occupyingPlayers, isOccupied, position);
   }
@@ -37,7 +36,7 @@ public class Hallway extends Location
   {
     return "Location [connectedLocation=" + connectedLocation
         + ", occupyingPlayers=" + occupyingPlayers + ", isOccupied="
-        + isOccupied + ", position=" + Arrays.toString(position) + "]";
+        + isOccupied + ", position=" + position.toString() + "]";
   }
   
   

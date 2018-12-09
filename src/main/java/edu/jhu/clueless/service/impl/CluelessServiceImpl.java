@@ -4,7 +4,11 @@
 package edu.jhu.clueless.service.impl;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.json.JSONException;
@@ -16,12 +20,15 @@ import edu.jhu.clueless.DTO.EndTurnRequestDTO;
 import edu.jhu.clueless.DTO.EndTurnResponseDTO;
 import edu.jhu.clueless.DTO.InitRequestDTO;
 import edu.jhu.clueless.DTO.InitResponseDTO;
+import edu.jhu.clueless.DTO.LegalMovesDTO;
 import edu.jhu.clueless.DTO.MoveRequestDTO;
 import edu.jhu.clueless.DTO.MoveResponseDTO;
 import edu.jhu.clueless.DTO.SuggestRequestDTO;
 import edu.jhu.clueless.DTO.SuggestResponseDTO;
 import edu.jhu.clueless.domain.ConfidentialFile;
 import edu.jhu.clueless.domain.Hallway;
+import edu.jhu.clueless.domain.Location;
+import edu.jhu.clueless.domain.Pair;
 import edu.jhu.clueless.domain.Player;
 import edu.jhu.clueless.domain.Room;
 import edu.jhu.clueless.domain.Weapon;
@@ -93,6 +100,8 @@ public class CluelessServiceImpl implements CluelessService
    private static Player mrGreen = new Player("mrGreen");
    private static Player mrsWhite = new Player("mrsWhite");
    
+   private static Map<Integer, Player> playerMapping;
+   private static Map<Pair, Location> locationMapping = new HashMap<>();
    /*
     * Initialize Confidential File
     */
@@ -111,16 +120,16 @@ public class CluelessServiceImpl implements CluelessService
     /*
      * Top row
      */
-    Room newStudy = new Room(new int[0][0]);
+    Room newStudy = new Room(new Pair(0, 0));
     study = newStudy;
     
-    Hallway newStudyHallHallway = new Hallway(new int[0][1]);
+    Hallway newStudyHallHallway = new Hallway(new Pair(0, 1));
     studyHallHallway = newStudyHallHallway;
     
-    Room newHall = new Room(new int[0][2]);
+    Room newHall = new Room(new Pair(0, 2));
     hall = newHall;
     
-    Hallway newHallLoungeHallway = new Hallway(new int[0][3]);
+    Hallway newHallLoungeHallway = new Hallway(new Pair(0, 3));
     hallLoungeHallway = newHallLoungeHallway;
     Set<Player> playerSet = new HashSet<Player>();
     playerSet.add(missScarlet);
@@ -128,23 +137,23 @@ public class CluelessServiceImpl implements CluelessService
     
 
     
-    Room newLounge = new Room(new int[0][4]);
+    Room newLounge = new Room(new Pair(0, 4));
     lounge = newLounge;
     
 
     /*
      * Second row
      */
-    Hallway newStudyLibraryHallway = new Hallway(new int[1][0]);
+    Hallway newStudyLibraryHallway = new Hallway(new Pair(1, 0));
     studyLibraryHallway = newStudyLibraryHallway;
     playerSet = new HashSet<Player>();
     playerSet.add(profPlum);
     studyLibraryHallway.setOccupyingPlayers(playerSet);
     
-    Hallway newHallBillardRoomHallway = new Hallway(new int[1][2]);
+    Hallway newHallBillardRoomHallway = new Hallway(new Pair(1, 2));
     hallBillardRoomHallway = newHallBillardRoomHallway;
     
-    Hallway newLoungeDinningRoomHallway = new Hallway(new int[1][4]);
+    Hallway newLoungeDinningRoomHallway = new Hallway(new Pair(1, 4));
     loungeDinningRoomHallway = newLoungeDinningRoomHallway;
     playerSet = new HashSet<Player>();
     playerSet.add(colMustard);
@@ -153,61 +162,95 @@ public class CluelessServiceImpl implements CluelessService
     /*
      * Third row
      */
-    Room newLibrary = new Room(new int[2][0]);
+    Room newLibrary = new Room(new Pair(2, 0));
     library = newLibrary;
     
-    Hallway newLibraryBillardRoomHallway = new Hallway(new int[2][1]);
+    Hallway newLibraryBillardRoomHallway = new Hallway(new Pair(2, 1));
     libraryBillardRoomHallway = newLibraryBillardRoomHallway;
     
-    Room newBillardRoom = new Room(new int[2][2]);
+    Room newBillardRoom = new Room(new Pair(2, 2));
     billardRoom = newBillardRoom;
     
-    Hallway newBillardDinningRoomHallway = new Hallway(new int[2][3]);
+    Hallway newBillardDinningRoomHallway = new Hallway(new Pair(2, 3));
     billardDinningRoomHallway = newBillardDinningRoomHallway;
     
-    Room newDinningRoom = new Room(new int[2][4]);
+    Room newDinningRoom = new Room(new Pair(2, 4));
     dinningRoom = newDinningRoom;
 
     /*
      * Forth row
      */
-    Hallway newLibraryConservatoryHallway = new Hallway(new int[3][0]);
+    Hallway newLibraryConservatoryHallway = new Hallway(new Pair(3, 0));
     libraryConservatoryHallway = newLibraryConservatoryHallway;
     playerSet = new HashSet<Player>();
     playerSet.add(mrsPeacock);
     libraryConservatoryHallway.setOccupyingPlayers(playerSet);
     
-    Hallway newBillardRoomBallRoomHallway = new Hallway(new int[3][2]);
+    Hallway newBillardRoomBallRoomHallway = new Hallway(new Pair(3, 2));
     billardRoomBallRoomHallway = newBillardRoomBallRoomHallway;
     
-    Hallway newDinningRoomKitchenHallway = new Hallway(new int[3][4]);
+    Hallway newDinningRoomKitchenHallway = new Hallway(new Pair(3, 4));
     dinningRoomKitchenHallway = newDinningRoomKitchenHallway;
     
     
     /*
      * Fifth row
      */
-    Room newConservatory = new Room(new int[4][0]);
+    Room newConservatory = new Room(new Pair(4, 0));
     conservatory = newConservatory;
     
-    Hallway newConservatoryBallRoomHallway = new Hallway(new int[4][1]);
+    Hallway newConservatoryBallRoomHallway = new Hallway(new Pair(4, 1));
     conservatoryBallRoomHallway = newConservatoryBallRoomHallway;
     playerSet = new HashSet<Player>();
     playerSet.add(mrGreen);
     conservatoryBallRoomHallway.setOccupyingPlayers(playerSet);
     
-    Room newBallRoom = new Room(new int[4][2]);
+    Room newBallRoom = new Room(new Pair(4, 2));
     ballRoom = newBallRoom;
     
-    Hallway newBallRoomKitchenHallway = new Hallway(new int[4][3]);
+    Hallway newBallRoomKitchenHallway = new Hallway(new Pair(4, 3));
     ballRoomKitchenHallway = newBallRoomKitchenHallway; 
     playerSet = new HashSet<Player>();
     playerSet.add(mrsWhite);
     ballRoomKitchenHallway.setOccupyingPlayers(playerSet);
     
-    Room newKitchen = new Room(new int[4][4]);
+    
+    
+    
+    
+    
+    
+    
+    Room newKitchen = new Room(new Pair(4, 4));
     kitchen = newKitchen;
   
+    /*
+     * Map all of the locations coordinates to their Locations
+     */
+    locationMapping.put(kitchen.getPosition(), kitchen);
+    locationMapping.put(ballRoom.getPosition(), ballRoom);
+    locationMapping.put(conservatory.getPosition(), conservatory);
+    locationMapping.put(study.getPosition(), study);
+    locationMapping.put(hall.getPosition(), hall);
+    locationMapping.put(billardRoom.getPosition(), billardRoom);
+    locationMapping.put(library.getPosition(), library);
+    locationMapping.put(dinningRoom.getPosition(), dinningRoom);
+    locationMapping.put(lounge.getPosition(), lounge);
+    //hallways
+    locationMapping.put(ballRoomKitchenHallway.getPosition(), ballRoomKitchenHallway);
+    locationMapping.put(billardDinningRoomHallway.getPosition(), billardDinningRoomHallway);
+    locationMapping.put(billardRoomBallRoomHallway.getPosition(), billardRoomBallRoomHallway);
+    locationMapping.put(conservatoryBallRoomHallway.getPosition(), conservatoryBallRoomHallway);
+    locationMapping.put(dinningRoomKitchenHallway.getPosition(), dinningRoomKitchenHallway);
+    locationMapping.put(hallBillardRoomHallway.getPosition(), hallBillardRoomHallway);
+    locationMapping.put(hallLoungeHallway.getPosition(), hallLoungeHallway);
+    locationMapping.put(libraryBillardRoomHallway.getPosition(), libraryBillardRoomHallway);
+    locationMapping.put(libraryConservatoryHallway.getPosition(), libraryConservatoryHallway);
+    locationMapping.put(loungeDinningRoomHallway.getPosition(), loungeDinningRoomHallway);
+    locationMapping.put(studyHallHallway.getPosition(), studyHallHallway);
+    locationMapping.put(studyLibraryHallway.getPosition(), studyLibraryHallway);
+    
+    
     ConfidentialFile newConfidentialFile = createNewConfidentialFile();
     myConfidentialFile = newConfidentialFile;
 
@@ -264,4 +307,22 @@ public class CluelessServiceImpl implements CluelessService
     return myConfidentialFile;
   }
   
+  public LegalMovesDTO getLegalMoves(Integer player) {
+	  Player p = playerMapping.get(player);
+	  Location l = p.getLocation();
+	  LegalMovesDTO dto = new LegalMovesDTO();
+	  List<Location> legalMoveLocations = new LinkedList<>();
+	  for (Location possibleMove : l.getConnectedLocation()) {
+		  if (possibleMove instanceof Hallway) {
+			  if (!possibleMove.isOccupied()) {
+				  legalMoveLocations.add(possibleMove);
+			  }
+		  }
+		  else {
+			  legalMoveLocations.add(possibleMove);
+		  }
+	  }
+	  dto.setLegalMoves(legalMoveLocations);
+	  return dto;
+  }
 }

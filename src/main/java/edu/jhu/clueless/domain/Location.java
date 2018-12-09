@@ -3,7 +3,6 @@
  */
 package edu.jhu.clueless.domain;
 
-import java.util.Arrays;
 import java.util.Set;
 
 /**
@@ -20,7 +19,7 @@ public abstract class Location
    * 5 by 5 grid.  rows with rooms are full, 
    * rows with only hallway have some sparsity. 
    */
-  protected int[][] position; 
+  protected Pair position; 
   
   /**
    * No arg constructor
@@ -30,7 +29,7 @@ public abstract class Location
     
   };
   
-  public Location(int[][] position) 
+  public Location(Pair position) 
   {
     this.position = position;
   };
@@ -45,7 +44,7 @@ public abstract class Location
    * @param position
    */
   public Location(Set<Location> connectedLocation,
-      Set<Player> occupyingPlayers, boolean isOccupied, int[][] position)
+      Set<Player> occupyingPlayers, boolean isOccupied, Pair position)
   {
     super();
     this.connectedLocation = connectedLocation;
@@ -80,6 +79,9 @@ public abstract class Location
   public void setOccupyingPlayers(Set<Player> occupyingPlayers)
   {
     this.occupyingPlayers = occupyingPlayers;
+    for (Player p : occupyingPlayers) {
+    	p.setLocation(this);
+    }
   }
   /**
    * @return the isOccupied
@@ -98,17 +100,19 @@ public abstract class Location
   /**
    * @return the position
    */
-  public int[][] getPosition()
+  public Pair getPosition()
   {
     return position;
   }
   /**
    * @param position the position to set
    */
-  public void setPosition(int[][] position)
+  public void setPosition(Pair position)
   {
     this.position = position;
   }
+  
+ 
 
   /* (non-Javadoc)
    * @see java.lang.Object#toString()
@@ -118,7 +122,7 @@ public abstract class Location
   {
     return "Location [connectedLocation=" + connectedLocation
         + ", occupyingPlayers=" + occupyingPlayers + ", isOccupied="
-        + isOccupied + ", position=" + Arrays.toString(position) + "]";
+        + isOccupied + ", position=(" + position.getKey() + "," + position.getValue() + ")]";
   }
 
   /* (non-Javadoc)
@@ -134,7 +138,7 @@ public abstract class Location
     result = prime * result + (isOccupied ? 1231 : 1237);
     result = prime * result
         + ((occupyingPlayers == null) ? 0 : occupyingPlayers.hashCode());
-    result = prime * result + Arrays.deepHashCode(position);
+    result = prime * result + position.hashCode();
     return result;
   }
 
@@ -167,7 +171,7 @@ public abstract class Location
     }
     else if (!occupyingPlayers.equals(other.occupyingPlayers))
       return false;
-    if (!Arrays.deepEquals(position, other.position))
+    if (position.equals(other.position))
       return false;
     return true;
   }
