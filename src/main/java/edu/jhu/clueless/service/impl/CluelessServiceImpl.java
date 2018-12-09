@@ -6,9 +6,6 @@ package edu.jhu.clueless.service.impl;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.json.JSONException;
@@ -25,6 +22,7 @@ import edu.jhu.clueless.DTO.MoveRequestDTO;
 import edu.jhu.clueless.DTO.MoveResponseDTO;
 import edu.jhu.clueless.DTO.SuggestRequestDTO;
 import edu.jhu.clueless.DTO.SuggestResponseDTO;
+import edu.jhu.clueless.domain.Card;
 import edu.jhu.clueless.domain.ConfidentialFile;
 import edu.jhu.clueless.domain.Hallway;
 import edu.jhu.clueless.domain.Location;
@@ -42,6 +40,17 @@ import edu.jhu.clueless.service.CluelessService;
 public class CluelessServiceImpl implements CluelessService
 {
   
+  /*
+   * Initialize Weapons
+   */
+  private static Weapon revolver = new Weapon("revolver");
+  private static Weapon rope = new Weapon("rope");
+  private static Weapon leadPipe = new Weapon("leadPipe");
+  private static Weapon knife = new Weapon("knife");
+  private static Weapon wrench = new Weapon("wrench");
+  private static Weapon candlestick = new Weapon("candlestick");
+
+
   /*
    * Initialize Locations
    */
@@ -131,7 +140,15 @@ public class CluelessServiceImpl implements CluelessService
     
     Hallway newHallLoungeHallway = new Hallway(new Pair(0, 3));
     hallLoungeHallway = newHallLoungeHallway;
-    Set<Player> playerSet = new HashSet<Player>();
+    
+    Set<Card> missScarletCardSet = new HashSet<Card>();
+    missScarletCardSet.add(kitchen);
+    missScarletCardSet.add(conservatory);
+    missScarletCardSet.add(mrGreen);
+    missScarletCardSet.add(candlestick);
+    missScarlet.setPlayerCards(missScarletCardSet);
+
+    Set<Player> playerSet = new HashSet<Player>();    
     playerSet.add(missScarlet);
     hallLoungeHallway.setOccupyingPlayers(playerSet);
     
@@ -146,7 +163,14 @@ public class CluelessServiceImpl implements CluelessService
      */
     Hallway newStudyLibraryHallway = new Hallway(new Pair(1, 0));
     studyLibraryHallway = newStudyLibraryHallway;
-    playerSet = new HashSet<Player>();
+    
+    Set<Card> profPlumCardSet = new HashSet<Card>();
+    profPlumCardSet.add(library);
+    profPlumCardSet.add(missScarlet);
+    profPlumCardSet.add(rope);
+    profPlum.setPlayerCards(profPlumCardSet);
+
+    playerSet = new HashSet<Player>(); 
     playerSet.add(profPlum);
     studyLibraryHallway.setOccupyingPlayers(playerSet);
     
@@ -155,7 +179,14 @@ public class CluelessServiceImpl implements CluelessService
     
     Hallway newLoungeDinningRoomHallway = new Hallway(new Pair(1, 4));
     loungeDinningRoomHallway = newLoungeDinningRoomHallway;
-    playerSet = new HashSet<Player>();
+    
+    Set<Card> colMustardCardSet = new HashSet<Card>();
+    colMustardCardSet.add(hall);
+    colMustardCardSet.add(mrsPeacock);
+    colMustardCardSet.add(leadPipe);
+    colMustard.setPlayerCards(colMustardCardSet);
+
+    playerSet = new HashSet<Player>(); 
     playerSet.add(colMustard);
     loungeDinningRoomHallway.setOccupyingPlayers(playerSet);
     
@@ -182,7 +213,15 @@ public class CluelessServiceImpl implements CluelessService
      */
     Hallway newLibraryConservatoryHallway = new Hallway(new Pair(3, 0));
     libraryConservatoryHallway = newLibraryConservatoryHallway;
-    playerSet = new HashSet<Player>();
+
+    
+    Set<Card> mrsPeacockCardSet = new HashSet<Card>();
+    mrsPeacockCardSet.add(study);
+    mrsPeacockCardSet.add(colMustard);
+    mrsPeacockCardSet.add(knife);
+    mrsPeacock.setPlayerCards(mrsPeacockCardSet);
+
+    playerSet = new HashSet<Player>(); 
     playerSet.add(mrsPeacock);
     libraryConservatoryHallway.setOccupyingPlayers(playerSet);
     
@@ -201,7 +240,14 @@ public class CluelessServiceImpl implements CluelessService
     
     Hallway newConservatoryBallRoomHallway = new Hallway(new Pair(4, 1));
     conservatoryBallRoomHallway = newConservatoryBallRoomHallway;
-    playerSet = new HashSet<Player>();
+    
+    Set<Card> mrGreenCardSet = new HashSet<Card>();
+    mrGreenCardSet.add(dinningRoom);
+    mrGreenCardSet.add(mrsWhite);
+    mrGreenCardSet.add(wrench);
+    mrGreen.setPlayerCards(mrGreenCardSet);
+
+    playerSet = new HashSet<Player>(); 
     playerSet.add(mrGreen);
     conservatoryBallRoomHallway.setOccupyingPlayers(playerSet);
     
@@ -210,7 +256,14 @@ public class CluelessServiceImpl implements CluelessService
     
     Hallway newBallRoomKitchenHallway = new Hallway(new Pair(4, 3));
     ballRoomKitchenHallway = newBallRoomKitchenHallway; 
-    playerSet = new HashSet<Player>();
+    
+    Set<Card> mrsWhiteCardSet = new HashSet<Card>();
+    mrsWhiteCardSet.add(lounge);
+    mrsWhiteCardSet.add(billardRoom);
+    mrsWhiteCardSet.add(mrGreen);
+    mrsWhite.setPlayerCards(mrGreenCardSet);
+
+    playerSet = new HashSet<Player>(); 
     playerSet.add(mrsWhite);
     ballRoomKitchenHallway.setOccupyingPlayers(playerSet);
     
@@ -256,7 +309,12 @@ public class CluelessServiceImpl implements CluelessService
 
     InitResponseDTO myInitResponseDTO = new InitResponseDTO();
     
-    myInitResponseDTO.setMessage("Initialization of " + myInitRequestDTO.getGameName() + " Successful\n");
+    myInitResponseDTO.setStatusMessage("Successful");
+    myInitResponseDTO.setColMustard(colMustard.toString());
+    myInitResponseDTO.setMissScarlet(missScarlet.toString());
+    myInitResponseDTO.setMrGreen(mrGreen.toString());
+    myInitResponseDTO.setMrsPeacock(mrsPeacock.toString());
+    myInitResponseDTO.setProfPlum(profPlum.toString());
     
     return myInitResponseDTO;
   }
@@ -302,7 +360,7 @@ public class CluelessServiceImpl implements CluelessService
     
     myConfidentialFile.setMurderingPlayer(colMustard);
     myConfidentialFile.setMurderLocation(ballRoom);
-    myConfidentialFile.setMurderWeapon(new Weapon("Revolver"));
+    myConfidentialFile.setMurderWeapon(new Weapon("revolver"));
     
     return myConfidentialFile;
   }

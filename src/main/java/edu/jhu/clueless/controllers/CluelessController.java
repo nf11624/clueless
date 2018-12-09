@@ -96,5 +96,6 @@ public class CluelessController
       SuggestResponseDTO result = myCluelessService.suggest(mySuggestRequestDTO);
       return ResponseEntity.ok().body(result);
     }    
+    
 
 }

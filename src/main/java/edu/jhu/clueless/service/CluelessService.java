@@ -19,6 +19,8 @@ import edu.jhu.clueless.DTO.SuggestResponseDTO;
  * Service facade interface for clueless operations.
  */
 public interface CluelessService {
+  
+  
 
     InitResponseDTO initGame(InitRequestDTO myInitRequestDTO) throws IOException, JSONException;
     
