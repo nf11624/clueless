@@ -22,10 +22,6 @@ import edu.jhu.clueless.DTO.MoveRequestDTO;
 import edu.jhu.clueless.DTO.MoveResponseDTO;
 import edu.jhu.clueless.DTO.SuggestRequestDTO;
 import edu.jhu.clueless.DTO.SuggestResponseDTO;
-import edu.jhu.clueless.domain.ConfidentialFile;
-import edu.jhu.clueless.domain.Hallway;
-import edu.jhu.clueless.domain.Player;
-import edu.jhu.clueless.domain.Room;
 import edu.jhu.clueless.service.CluelessService;
 
 @RestController
@@ -83,5 +79,6 @@ public class CluelessController
       SuggestResponseDTO result = myCluelessService.suggest(mySuggestRequestDTO);
       return ResponseEntity.ok().body(result);
     }    
+    
 
 }

@@ -19,6 +19,7 @@ import edu.jhu.clueless.DTO.MoveRequestDTO;
 import edu.jhu.clueless.DTO.MoveResponseDTO;
 import edu.jhu.clueless.DTO.SuggestRequestDTO;
 import edu.jhu.clueless.DTO.SuggestResponseDTO;
+import edu.jhu.clueless.domain.Card;
 import edu.jhu.clueless.domain.ConfidentialFile;
 import edu.jhu.clueless.domain.Hallway;
 import edu.jhu.clueless.domain.Player;
@@ -33,6 +34,18 @@ import edu.jhu.clueless.service.CluelessService;
 public class CluelessServiceImpl implements CluelessService
 {
   
+  
+  /*
+   * Initialize Weapons
+   */
+  private static Weapon revolver = new Weapon("revolver");
+  private static Weapon rope = new Weapon("rope");
+  private static Weapon leadPipe = new Weapon("leadPipe");
+  private static Weapon knife = new Weapon("knife");
+  private static Weapon wrench = new Weapon("wrench");
+  private static Weapon candlestick = new Weapon("candlestick");
+
+
   /*
    * Initialize Locations
    */
@@ -110,23 +123,36 @@ public class CluelessServiceImpl implements CluelessService
      * Top row
      */
     Room newStudy = new Room(new int[0][0]);
+    newStudy.setOccupied(false);
     study = newStudy;
     
     Hallway newStudyHallHallway = new Hallway(new int[0][1]);
+    newStudyHallHallway.setOccupied(false);
     studyHallHallway = newStudyHallHallway;
     
     Room newHall = new Room(new int[0][2]);
+    newHall.setOccupied(false);
     hall = newHall;
     
     Hallway newHallLoungeHallway = new Hallway(new int[0][3]);
     hallLoungeHallway = newHallLoungeHallway;
-    Set<Player> playerSet = new HashSet<Player>();
+    
+    Set<Card> missScarletCardSet = new HashSet<Card>();
+    missScarletCardSet.add(kitchen);
+    missScarletCardSet.add(conservatory);
+    missScarletCardSet.add(mrGreen);
+    missScarletCardSet.add(candlestick);
+    missScarlet.setPlayerCards(missScarletCardSet);
+
+    Set<Player> playerSet = new HashSet<Player>();    
     playerSet.add(missScarlet);
+    
+    hallLoungeHallway.setOccupied(true);
     hallLoungeHallway.setOccupyingPlayers(playerSet);
     
-
     
     Room newLounge = new Room(new int[0][4]);
+    newLounge.setOccupied(false);
     lounge = newLounge;
     
 
@@ -135,35 +161,59 @@ public class CluelessServiceImpl implements CluelessService
      */
     Hallway newStudyLibraryHallway = new Hallway(new int[1][0]);
     studyLibraryHallway = newStudyLibraryHallway;
-    playerSet = new HashSet<Player>();
+    
+    Set<Card> profPlumCardSet = new HashSet<Card>();
+    profPlumCardSet.add(library);
+    profPlumCardSet.add(missScarlet);
+    profPlumCardSet.add(rope);
+    profPlum.setPlayerCards(profPlumCardSet);
+
+    playerSet = new HashSet<Player>(); 
     playerSet.add(profPlum);
+    
+    studyLibraryHallway.setOccupied(true);
     studyLibraryHallway.setOccupyingPlayers(playerSet);
     
     Hallway newHallBillardRoomHallway = new Hallway(new int[1][2]);
+    newHallBillardRoomHallway.setOccupied(false);
     hallBillardRoomHallway = newHallBillardRoomHallway;
     
     Hallway newLoungeDinningRoomHallway = new Hallway(new int[1][4]);
     loungeDinningRoomHallway = newLoungeDinningRoomHallway;
-    playerSet = new HashSet<Player>();
+    
+    Set<Card> colMustardCardSet = new HashSet<Card>();
+    colMustardCardSet.add(hall);
+    colMustardCardSet.add(mrsPeacock);
+    colMustardCardSet.add(leadPipe);
+    colMustard.setPlayerCards(colMustardCardSet);
+
+    playerSet = new HashSet<Player>(); 
     playerSet.add(colMustard);
+    
+    loungeDinningRoomHallway.setOccupied(true);
     loungeDinningRoomHallway.setOccupyingPlayers(playerSet);
     
     /*
      * Third row
      */
     Room newLibrary = new Room(new int[2][0]);
+    newLibrary.setOccupied(false);
     library = newLibrary;
     
     Hallway newLibraryBillardRoomHallway = new Hallway(new int[2][1]);
+    newLibraryBillardRoomHallway.setOccupied(false);
     libraryBillardRoomHallway = newLibraryBillardRoomHallway;
     
     Room newBillardRoom = new Room(new int[2][2]);
+    newBillardRoom.setOccupied(false);
     billardRoom = newBillardRoom;
     
     Hallway newBillardDinningRoomHallway = new Hallway(new int[2][3]);
+    newBillardDinningRoomHallway.setOccupied(false);
     billardDinningRoomHallway = newBillardDinningRoomHallway;
     
     Room newDinningRoom = new Room(new int[2][4]);
+    newDinningRoom.setOccupied(false);
     dinningRoom = newDinningRoom;
 
     /*
@@ -171,14 +221,26 @@ public class CluelessServiceImpl implements CluelessService
      */
     Hallway newLibraryConservatoryHallway = new Hallway(new int[3][0]);
     libraryConservatoryHallway = newLibraryConservatoryHallway;
-    playerSet = new HashSet<Player>();
+
+    
+    Set<Card> mrsPeacockCardSet = new HashSet<Card>();
+    mrsPeacockCardSet.add(study);
+    mrsPeacockCardSet.add(colMustard);
+    mrsPeacockCardSet.add(knife);
+    mrsPeacock.setPlayerCards(mrsPeacockCardSet);
+
+    playerSet = new HashSet<Player>(); 
     playerSet.add(mrsPeacock);
+    
+    libraryConservatoryHallway.setOccupied(true);
     libraryConservatoryHallway.setOccupyingPlayers(playerSet);
     
     Hallway newBillardRoomBallRoomHallway = new Hallway(new int[3][2]);
+    newBillardRoomBallRoomHallway.setOccupied(false);
     billardRoomBallRoomHallway = newBillardRoomBallRoomHallway;
     
     Hallway newDinningRoomKitchenHallway = new Hallway(new int[3][4]);
+    newDinningRoomKitchenHallway.setOccupied(false);
     dinningRoomKitchenHallway = newDinningRoomKitchenHallway;
     
     
@@ -186,24 +248,45 @@ public class CluelessServiceImpl implements CluelessService
      * Fifth row
      */
     Room newConservatory = new Room(new int[4][0]);
+    newConservatory.setOccupied(false);
     conservatory = newConservatory;
     
     Hallway newConservatoryBallRoomHallway = new Hallway(new int[4][1]);
     conservatoryBallRoomHallway = newConservatoryBallRoomHallway;
-    playerSet = new HashSet<Player>();
+    
+    Set<Card> mrGreenCardSet = new HashSet<Card>();
+    mrGreenCardSet.add(dinningRoom);
+    mrGreenCardSet.add(mrsWhite);
+    mrGreenCardSet.add(wrench);
+    mrGreen.setPlayerCards(mrGreenCardSet);
+
+    playerSet = new HashSet<Player>(); 
     playerSet.add(mrGreen);
+    
+    conservatoryBallRoomHallway.setOccupied(false);
     conservatoryBallRoomHallway.setOccupyingPlayers(playerSet);
     
     Room newBallRoom = new Room(new int[4][2]);
+    newBallRoom.setOccupied(false);
     ballRoom = newBallRoom;
     
     Hallway newBallRoomKitchenHallway = new Hallway(new int[4][3]);
     ballRoomKitchenHallway = newBallRoomKitchenHallway; 
-    playerSet = new HashSet<Player>();
+    
+    Set<Card> mrsWhiteCardSet = new HashSet<Card>();
+    mrsWhiteCardSet.add(lounge);
+    mrsWhiteCardSet.add(billardRoom);
+    mrsWhiteCardSet.add(mrGreen);
+    mrsWhite.setPlayerCards(mrGreenCardSet);
+
+    playerSet = new HashSet<Player>(); 
     playerSet.add(mrsWhite);
+    
+    ballRoomKitchenHallway.setOccupied(true);
     ballRoomKitchenHallway.setOccupyingPlayers(playerSet);
     
     Room newKitchen = new Room(new int[4][4]);
+    newKitchen.setOccupied(false);
     kitchen = newKitchen;
   
     ConfidentialFile newConfidentialFile = createNewConfidentialFile();
@@ -211,7 +294,12 @@ public class CluelessServiceImpl implements CluelessService
 
     InitResponseDTO myInitResponseDTO = new InitResponseDTO();
     
-    myInitResponseDTO.setMessage("Successful");
+    myInitResponseDTO.setStatusMessage("Successful");
+    myInitResponseDTO.setColMustard(colMustard.toString());
+    myInitResponseDTO.setMissScarlet(missScarlet.toString());
+    myInitResponseDTO.setMrGreen(mrGreen.toString());
+    myInitResponseDTO.setMrsPeacock(mrsPeacock.toString());
+    myInitResponseDTO.setProfPlum(profPlum.toString());
     
     return myInitResponseDTO;
   }
@@ -257,9 +345,10 @@ public class CluelessServiceImpl implements CluelessService
     
     myConfidentialFile.setMurderingPlayer(colMustard);
     myConfidentialFile.setMurderLocation(ballRoom);
-    myConfidentialFile.setMurderWeapon(new Weapon("Revolver"));
+    myConfidentialFile.setMurderWeapon(new Weapon("revolver"));
     
     return myConfidentialFile;
   }
+  
   
 }
