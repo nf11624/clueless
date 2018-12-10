@@ -350,8 +350,98 @@ public class CluelessServiceImpl implements CluelessService
   public MoveResponseDTO move(MoveRequestDTO myMoveRequestDTO)
       throws IOException, JSONException
   {
-    // TODO Auto-generated method stub
-    return null;
+    // This method assumes that @getLegalMoves() has already been called
+    // If that method returns zero legal moves and the player calls this method he'll be stuck here
+    int playerNumber = myMoveRequestDTO.getPlayer();
+    Player player = playerMapping.get(playerNumber);
+    Location currentLocation = player.getLocation();
+    Pair position = currentLocation.getPosition();
+    
+    int requestedDirection = myMoveRequestDTO.getDirection();
+    Location requestedLocation = getNextLocation(requestedDirection, position);
+    
+    MoveResponseDTO response = new MoveResponseDTO("Initial Response");
+    
+    // Determine if the move lands the player on the board
+    if (requestedLocation == null)
+    {
+      response.setMessage("The requested direction is invalid given your position.");
+      return response;
+    }
+    
+    // Check if the requested direction is occupied
+    if (requestedLocation.isOccupied())
+    {
+      response.setMessage("The requested location is currently occupied by another player.");
+      return response;
+    }
+    
+    // The move is valid and the location is not occupied so we may move the player
+    currentLocation.removeOccupyingPlayer(player);
+    player.setLocation(requestedLocation);
+    requestedLocation.addOccupyingPlayer(player);
+    
+    response.setMessage(player.getPlayerName() + "has moved successfully.");
+    response.setResult(true);
+    return response;
+  }
+
+
+  // Determines whether the requested direction given the current player location will land the player in a valid location on the board
+  // If it is a valid location, it will return that location, otherwise it will return null
+  private Location getNextLocation(int requestedDirection, Pair currentPosition)
+  {
+    Location requestedLocation = null;
+    Pair requestedPosition = null;
+    
+    switch (requestedDirection)
+    {
+      case 0: // LEFT
+        requestedPosition = new Pair(currentPosition.getRow(), currentPosition.getColumn() - 1);
+        break;
+      
+      case 1: // RIGHT
+        requestedPosition = new Pair(currentPosition.getRow(), currentPosition.getColumn() + 1);
+        break;
+      
+      case 2: // UP
+        requestedPosition = new Pair(currentPosition.getRow() + 1, currentPosition.getColumn());
+        break;
+      
+      case 3: // DOWN
+        requestedPosition = new Pair(currentPosition.getRow() - 1, currentPosition.getColumn());
+        break;
+        
+      case 4: // DIAGONAL
+        if (currentPosition.getRow() == 0 && currentPosition.getColumn() == 0)
+        {
+          requestedPosition = new Pair(4, 4);
+        }
+        else if (currentPosition.getRow() == 0 && currentPosition.getColumn() == 4)
+        {
+          requestedPosition = new Pair(4, 0);
+        }
+        else if (currentPosition.getRow() == 4 && currentPosition.getColumn() == 0)
+        {
+          requestedPosition = new Pair(0, 4);
+        }
+        else if (currentPosition.getRow() == 4 && currentPosition.getColumn() == 4)
+        {
+          requestedPosition = new Pair(0, 0);
+        }
+        else
+        {
+          requestedPosition = new Pair(-1, -1);
+        }
+        break;
+        
+      default: // INVALID DIRECTION
+        requestedPosition = new Pair(-1, -1);
+        break;
+    }
+    
+    requestedLocation = locationMapping.get(requestedPosition);
+    return requestedLocation;
   }
 
   @Override
@@ -374,8 +464,32 @@ public class CluelessServiceImpl implements CluelessService
   public SuggestResponseDTO suggest(SuggestRequestDTO mySuggestRequestDTO)
       throws IOException, JSONException
   {
-    // TODO Auto-generated method stub
-    return null;
+    ConfidentialFile suggestion = new ConfidentialFile();
+    
+    Player suggestedPlayer = new Player(mySuggestRequestDTO.getSuggestedPlayerName());
+    suggestion.setMurderingPlayer(suggestedPlayer);
+    
+    Room suggestedRoom = new Room(mySuggestRequestDTO.getSuggestedRoomName());
+    suggestion.setMurderLocation(suggestedRoom);
+    
+    Weapon suggestedWeapon = new Weapon(mySuggestRequestDTO.getSuggestedWeaponName());
+    suggestion.setMurderWeapon(suggestedWeapon);
+    
+    SuggestResponseDTO mySuggestResponseDTO = new SuggestResponseDTO();
+    
+    if(suggestion.getMurderingPlayer().getPlayerName() == myConfidentialFile.getMurderingPlayer().getPlayerName() &&
+        suggestion.getMurderLocation().getRoomName() == myConfidentialFile.getMurderLocation().getRoomName() && 
+        suggestion.getMurderWeapon().getWeaponName() == myConfidentialFile.getMurderWeapon().getWeaponName())
+    {
+      mySuggestResponseDTO.setResult("true");
+      mySuggestResponseDTO.setCardRevealMessage("No cards revealed");
+    }
+    else
+    {
+      mySuggestResponseDTO.setResult("false");
+    }
+
+    return mySuggestResponseDTO;
   }
 
   

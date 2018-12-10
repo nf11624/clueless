@@ -3,6 +3,8 @@
  */
 package edu.jhu.clueless.domain;
 
+
+import java.util.LinkedList;
 import java.util.Set;
 
 /**
@@ -22,8 +24,8 @@ public class Hallway extends Location
     super(position);
   }
 
-  public Hallway(Set<Location> connectedLocation,
-      Set<Player> occupyingPlayers, boolean isOccupied, Pair position)
+  public Hallway(LinkedList<Location> connectedLocation,
+      LinkedList<Player> occupyingPlayers, boolean isOccupied, Pair position)
   {
     super(connectedLocation, occupyingPlayers, isOccupied, position);
   }
@@ -34,7 +36,7 @@ public class Hallway extends Location
   @Override
   public String toString()
   {
-    return "Location [connectedLocation=" + connectedLocation
+    return "Location [connectedLocation=" + connectedLocations
         + ", occupyingPlayers=" + occupyingPlayers + ", isOccupied="
         + isOccupied + ", position=" + position.toString() + "]";
   }

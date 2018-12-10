@@ -3,6 +3,8 @@
  */
 package edu.jhu.clueless.domain;
 
+
+import java.util.LinkedList;
 import java.util.Set;
 
 /**
@@ -23,8 +25,7 @@ public class Room extends Location
     super(position);
   }
   
-  
-  public Room(Set<Location> connectedLocation, Set<Player> occupyingPlayers,
+  public Room(LinkedList<Location> connectedLocation, LinkedList<Player> occupyingPlayers,
       boolean isOccupied, Pair position, String roomName)
   {
     super(connectedLocation, occupyingPlayers, isOccupied, position);
@@ -53,23 +54,13 @@ public class Room extends Location
   @Override
   public String toString()
   {
-    return "Location [connectedLocation=" + connectedLocation
+    return "Location [connectedLocation=" + connectedLocations
         + ", occupyingPlayers=" + occupyingPlayers + ", isOccupied="
         + isOccupied + ", position=" + position + ", "
             + "roomName=" + roomName + "]";
   }
 
-  /* (non-Javadoc)
-   * @see java.lang.Object#hashCode()
-   */
-  @Override
-  public int hashCode()
-  {
-    final int prime = 31;
-    int result = super.hashCode();
-    result = prime * result + ((roomName == null) ? 0 : roomName.hashCode());
-    return result;
-  }
+
 
   /* (non-Javadoc)
    * @see java.lang.Object#equals(java.lang.Object)

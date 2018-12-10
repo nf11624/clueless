@@ -3,6 +3,10 @@
  */
 package edu.jhu.clueless.domain;
 
+<<<<<<< HEAD
+=======
+import java.util.LinkedList;
+>>>>>>> refs/remotes/bess/master
 import java.util.Set;
 
 /**
@@ -11,8 +15,8 @@ import java.util.Set;
  */
 public abstract class Location extends Card
 {
-  protected Set<Location> connectedLocation;
-  protected Set<Player> occupyingPlayers;
+  protected LinkedList<Location> connectedLocations;
+  protected LinkedList<Player> occupyingPlayers;
   protected boolean isOccupied;
   
   /*
@@ -34,6 +38,7 @@ public abstract class Location extends Card
     this.position = position;
   };
   
+<<<<<<< HEAD
   /**
    * 
    *  Constructor using arguments 
@@ -45,44 +50,71 @@ public abstract class Location extends Card
    */
   public Location(Set<Location> connectedLocation,
       Set<Player> occupyingPlayers, boolean isOccupied, Pair position)
+=======
+
+  
+  public Location(LinkedList<Location> connectedLocations,
+      LinkedList<Player> occupyingPlayers, boolean isOccupied, Pair position)
+>>>>>>> refs/remotes/bess/master
   {
     super();
-    this.connectedLocation = connectedLocation;
+    this.connectedLocations = connectedLocations;
     this.occupyingPlayers = occupyingPlayers;
     this.isOccupied = isOccupied;
     this.position = position;
   }
+
   /**
    * @return the connectedLocation
    */
-  public Set<Location> getConnectedLocation()
+  public LinkedList<Location> getConnectedLocations()
   {
-    return connectedLocation;
+    return connectedLocations;
   }
+
   /**
    * @param connectedLocation the connectedLocation to set
    */
-  public void setConnectedLocation(Set<Location> connectedLocation)
+  public void setConnectedLocation(LinkedList<Location> connectedLocations)
   {
-    this.connectedLocation = connectedLocation;
+    this.connectedLocations = connectedLocations;
   }
+
   /**
    * @return the occupyingPlayers
    */
-  public Set<Player> getOccupyingPlayers()
+  public LinkedList<Player> getOccupyingPlayers()
   {
     return occupyingPlayers;
   }
+
   /**
    * @param occupyingPlayers the occupyingPlayers to set
    */
-  public void setOccupyingPlayers(Set<Player> occupyingPlayers)
+  public void setOccupyingPlayers(LinkedList<Player> occupyingPlayers)
   {
     this.occupyingPlayers = occupyingPlayers;
     for (Player p : occupyingPlayers) {
     	p.setLocation(this);
     }
   }
+  
+  /**
+   * @param occupyingPlayer the occupyingPlayer to remove
+   */
+  public void removeOccupyingPlayer(Player occupyingPlayer)
+  {
+    occupyingPlayers.remove(occupyingPlayer);
+  }
+  
+  /**
+   * @param occupyingPlayer the occupyingPlayer to add
+   */
+  public void addOccupyingPlayer(Player occupyingPlayer)
+  {
+    occupyingPlayers.add(occupyingPlayer);
+  }
+
   /**
    * @return the isOccupied
    */
@@ -90,6 +122,7 @@ public abstract class Location extends Card
   {
     return isOccupied;
   }
+
   /**
    * @param isOccupied the isOccupied to set
    */
@@ -97,6 +130,7 @@ public abstract class Location extends Card
   {
     this.isOccupied = isOccupied;
   }
+
   /**
    * @return the position
    */
@@ -104,6 +138,7 @@ public abstract class Location extends Card
   {
     return position;
   }
+
   /**
    * @param position the position to set
    */
@@ -120,11 +155,16 @@ public abstract class Location extends Card
   @Override
   public String toString()
   {
-    return "Location [connectedLocation=" + connectedLocation
+    return "Location [connectedLocation=" + connectedLocations
         + ", occupyingPlayers=" + occupyingPlayers + ", isOccupied="
+<<<<<<< HEAD
         + isOccupied + ", position=(" + position.getKey() + "," + position.getValue() + ")]";
+=======
+        + isOccupied + ", position=" + position + "]";
+>>>>>>> refs/remotes/bess/master
   }
 
+<<<<<<< HEAD
   /* (non-Javadoc)
    * @see java.lang.Object#hashCode()
    */
@@ -141,6 +181,8 @@ public abstract class Location extends Card
     result = prime * result + position.hashCode();
     return result;
   }
+=======
+>>>>>>> refs/remotes/bess/master
 
   /* (non-Javadoc)
    * @see java.lang.Object#equals(java.lang.Object)
@@ -155,12 +197,12 @@ public abstract class Location extends Card
     if (getClass() != obj.getClass())
       return false;
     Location other = (Location) obj;
-    if (connectedLocation == null)
+    if (connectedLocations == null)
     {
-      if (other.connectedLocation != null)
+      if (other.connectedLocations != null)
         return false;
     }
-    else if (!connectedLocation.equals(other.connectedLocation))
+    else if (!connectedLocations.equals(other.connectedLocations))
       return false;
     if (isOccupied != other.isOccupied)
       return false;
@@ -171,10 +213,23 @@ public abstract class Location extends Card
     }
     else if (!occupyingPlayers.equals(other.occupyingPlayers))
       return false;
+<<<<<<< HEAD
     if (position.equals(other.position))
+=======
+    if (position == null)
+    {
+      if (other.position != null)
+        return false;
+    }
+    else if (!position.equals(other.position))
+>>>>>>> refs/remotes/bess/master
       return false;
     return true;
   }
+
+ 
+ 
+
   
   
   

@@ -12,6 +12,7 @@ public class Pair implements Entry<Integer, Integer> {
 		this.y = y;
 	}
 	
+<<<<<<< HEAD
 	public Integer getX() {
 		return x;
 	}
@@ -30,6 +31,26 @@ public class Pair implements Entry<Integer, Integer> {
 	public Integer getValue() {
 		// TODO Auto-generated method stub
 		return getY();
+=======
+	public Integer getRow() {
+		return x;
+	}
+	
+	public Integer getColumn() {
+		return y;
+	}
+
+	@Override
+	public Integer getKey() {
+		// TODO Auto-generated method stub
+		return getRow();
+	}
+
+	@Override
+	public Integer getValue() {
+		// TODO Auto-generated method stub
+		return getColumn();
+>>>>>>> refs/remotes/bess/master
 	}
 
 	@Override
