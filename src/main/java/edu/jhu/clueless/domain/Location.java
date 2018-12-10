@@ -3,6 +3,7 @@
  */
 package edu.jhu.clueless.domain;
 
+import java.util.LinkedList;
 import java.util.Set;
 
 /**
@@ -11,8 +12,8 @@ import java.util.Set;
  */
 public abstract class Location extends Card
 {
-  protected Set<Location> connectedLocation;
-  protected Set<Player> occupyingPlayers;
+  protected LinkedList<Location> connectedLocation;
+  protected LinkedList<Player> occupyingPlayers;
   protected boolean isOccupied;
   
   /*
@@ -34,17 +35,10 @@ public abstract class Location extends Card
     this.position = position;
   };
   
-  /**
-   * 
-   *  Constructor using arguments 
-   *  
-   * @param connectedLocation
-   * @param occupyingPlayers
-   * @param isOccupied
-   * @param position
-   */
-  public Location(Set<Location> connectedLocation,
-      Set<Player> occupyingPlayers, boolean isOccupied, Pair position)
+
+  
+  public Location(LinkedList<Location> connectedLocation,
+      LinkedList<Player> occupyingPlayers, boolean isOccupied, Pair position)
   {
     super();
     this.connectedLocation = connectedLocation;
@@ -52,37 +46,39 @@ public abstract class Location extends Card
     this.isOccupied = isOccupied;
     this.position = position;
   }
+
   /**
    * @return the connectedLocation
    */
-  public Set<Location> getConnectedLocation()
+  public LinkedList<Location> getConnectedLocation()
   {
     return connectedLocation;
   }
+
   /**
    * @param connectedLocation the connectedLocation to set
    */
-  public void setConnectedLocation(Set<Location> connectedLocation)
+  public void setConnectedLocation(LinkedList<Location> connectedLocation)
   {
     this.connectedLocation = connectedLocation;
   }
+
   /**
    * @return the occupyingPlayers
    */
-  public Set<Player> getOccupyingPlayers()
+  public LinkedList<Player> getOccupyingPlayers()
   {
     return occupyingPlayers;
   }
+
   /**
    * @param occupyingPlayers the occupyingPlayers to set
    */
-  public void setOccupyingPlayers(Set<Player> occupyingPlayers)
+  public void setOccupyingPlayers(LinkedList<Player> occupyingPlayers)
   {
     this.occupyingPlayers = occupyingPlayers;
-    for (Player p : occupyingPlayers) {
-    	p.setLocation(this);
-    }
   }
+
   /**
    * @return the isOccupied
    */
@@ -90,6 +86,7 @@ public abstract class Location extends Card
   {
     return isOccupied;
   }
+
   /**
    * @param isOccupied the isOccupied to set
    */
@@ -97,6 +94,7 @@ public abstract class Location extends Card
   {
     this.isOccupied = isOccupied;
   }
+
   /**
    * @return the position
    */
@@ -104,6 +102,7 @@ public abstract class Location extends Card
   {
     return position;
   }
+
   /**
    * @param position the position to set
    */
@@ -111,8 +110,6 @@ public abstract class Location extends Card
   {
     this.position = position;
   }
-  
- 
 
   /* (non-Javadoc)
    * @see java.lang.Object#toString()
@@ -122,7 +119,7 @@ public abstract class Location extends Card
   {
     return "Location [connectedLocation=" + connectedLocation
         + ", occupyingPlayers=" + occupyingPlayers + ", isOccupied="
-        + isOccupied + ", position=(" + position.getKey() + "," + position.getValue() + ")]";
+        + isOccupied + ", position=" + position + "]";
   }
 
   /* (non-Javadoc)
@@ -138,7 +135,7 @@ public abstract class Location extends Card
     result = prime * result + (isOccupied ? 1231 : 1237);
     result = prime * result
         + ((occupyingPlayers == null) ? 0 : occupyingPlayers.hashCode());
-    result = prime * result + position.hashCode();
+    result = prime * result + ((position == null) ? 0 : position.hashCode());
     return result;
   }
 
@@ -171,10 +168,19 @@ public abstract class Location extends Card
     }
     else if (!occupyingPlayers.equals(other.occupyingPlayers))
       return false;
-    if (position.equals(other.position))
+    if (position == null)
+    {
+      if (other.position != null)
+        return false;
+    }
+    else if (!position.equals(other.position))
       return false;
     return true;
   }
+
+ 
+ 
+
   
   
   

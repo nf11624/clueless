@@ -3,6 +3,7 @@
  */
 package edu.jhu.clueless.domain;
 
+import java.util.LinkedList;
 import java.util.Set;
 
 /**
@@ -13,7 +14,7 @@ public class Player extends Card
 {
   private String playerName;
   private Location location;
-  private Set<Card> playerCards; 
+  private LinkedList<Card> playerCards; 
   /**
    * No arg constructor
    */
@@ -27,12 +28,24 @@ public class Player extends Card
    * 
    * @param playerName
    */
-  public Player(String playerName, Set<Card> playerCards)
+  public Player(String playerName, LinkedList<Card> playerCards)
   {
     super();
     this.playerName = playerName;
     this.playerCards = playerCards;
   }
+  
+
+
+  public Player(String playerName, Location location,
+      LinkedList<Card> playerCards)
+  {
+    this.playerName = playerName;
+    this.location = location;
+    this.playerCards = playerCards;
+  }
+
+
 
   /**
    * @return the playerName
@@ -50,31 +63,27 @@ public class Player extends Card
     this.playerName = playerName;
   }
 
+  
+
   /**
    * @return the playerCards
    */
-  public Set<Card> getPlayerCards()
+  public LinkedList<Card> getPlayerCards()
   {
     return playerCards;
   }
 
+
+
   /**
    * @param playerCards the playerCards to set
    */
-  public void setPlayerCards(Set<Card> playerCards)
+  public void setPlayerCards(LinkedList<Card> playerCards)
   {
     this.playerCards = playerCards;
   }
 
-  /* (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString()
-  {
-    return "Player [playerName=" + playerName + ", playerCards=" + playerCards
-        + "]";
-  }
+
 
   public Location getLocation() {
 	  return location;
@@ -83,7 +92,21 @@ public class Player extends Card
   public void setLocation(Location location) {
 	  this.location = location;
   }
-  
+
+
+
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString()
+  {
+    return "Player [playerName=" + playerName + ", location=" + location
+        + ", playerCards=" + playerCards + "]";
+  }
+
+
+
   /* (non-Javadoc)
    * @see java.lang.Object#hashCode()
    */
@@ -92,12 +115,15 @@ public class Player extends Card
   {
     final int prime = 31;
     int result = 1;
+    result = prime * result + ((location == null) ? 0 : location.hashCode());
     result = prime * result
         + ((playerCards == null) ? 0 : playerCards.hashCode());
     result = prime * result
         + ((playerName == null) ? 0 : playerName.hashCode());
     return result;
   }
+
+
 
   /* (non-Javadoc)
    * @see java.lang.Object#equals(java.lang.Object)
@@ -112,6 +138,13 @@ public class Player extends Card
     if (getClass() != obj.getClass())
       return false;
     Player other = (Player) obj;
+    if (location == null)
+    {
+      if (other.location != null)
+        return false;
+    }
+    else if (!location.equals(other.location))
+      return false;
     if (playerCards == null)
     {
       if (other.playerCards != null)
@@ -128,6 +161,8 @@ public class Player extends Card
       return false;
     return true;
   }
+  
+ 
   
   
   

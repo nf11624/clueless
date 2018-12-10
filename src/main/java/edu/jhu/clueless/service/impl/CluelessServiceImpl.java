@@ -144,14 +144,14 @@ public class CluelessServiceImpl implements CluelessService
     Hallway newHallLoungeHallway = new Hallway(new Pair(0, 3));
     hallLoungeHallway = newHallLoungeHallway;
     
-    Set<Card> missScarletCardSet = new HashSet<Card>();
+    LinkedList<Card> missScarletCardSet = new LinkedList<Card>();
     missScarletCardSet.add(kitchen);
     missScarletCardSet.add(conservatory);
     missScarletCardSet.add(mrGreen);
     missScarletCardSet.add(candlestick);
     missScarlet.setPlayerCards(missScarletCardSet);
 
-    Set<Player> playerSet = new HashSet<Player>();    
+    LinkedList<Player> playerSet = new LinkedList<Player>();    
     playerSet.add(missScarlet);
     hallLoungeHallway.setOccupyingPlayers(playerSet);
     
@@ -167,13 +167,13 @@ public class CluelessServiceImpl implements CluelessService
     Hallway newStudyLibraryHallway = new Hallway(new Pair(1, 0));
     studyLibraryHallway = newStudyLibraryHallway;
     
-    Set<Card> profPlumCardSet = new HashSet<Card>();
-    profPlumCardSet.add(library);
-    profPlumCardSet.add(missScarlet);
-    profPlumCardSet.add(rope);
-    profPlum.setPlayerCards(profPlumCardSet);
+    LinkedList<Card> profPlumCardLinkedList = new LinkedList<Card>();
+    profPlumCardLinkedList.add(library);
+    profPlumCardLinkedList.add(missScarlet);
+    profPlumCardLinkedList.add(rope);
+    profPlum.setPlayerCards(profPlumCardLinkedList);
 
-    playerSet = new HashSet<Player>(); 
+    playerSet = new LinkedList<Player>(); 
     playerSet.add(profPlum);
     studyLibraryHallway.setOccupyingPlayers(playerSet);
     
@@ -183,13 +183,13 @@ public class CluelessServiceImpl implements CluelessService
     Hallway newLoungeDinningRoomHallway = new Hallway(new Pair(1, 4));
     loungeDinningRoomHallway = newLoungeDinningRoomHallway;
     
-    Set<Card> colMustardCardSet = new HashSet<Card>();
+    LinkedList<Card> colMustardCardSet = new LinkedList<Card>();
     colMustardCardSet.add(hall);
     colMustardCardSet.add(mrsPeacock);
     colMustardCardSet.add(leadPipe);
     colMustard.setPlayerCards(colMustardCardSet);
 
-    playerSet = new HashSet<Player>(); 
+    playerSet = new LinkedList<Player>(); 
     playerSet.add(colMustard);
     loungeDinningRoomHallway.setOccupyingPlayers(playerSet);
     
@@ -218,13 +218,13 @@ public class CluelessServiceImpl implements CluelessService
     libraryConservatoryHallway = newLibraryConservatoryHallway;
 
     
-    Set<Card> mrsPeacockCardSet = new HashSet<Card>();
+    LinkedList<Card> mrsPeacockCardSet = new LinkedList<Card>();
     mrsPeacockCardSet.add(study);
     mrsPeacockCardSet.add(colMustard);
     mrsPeacockCardSet.add(knife);
     mrsPeacock.setPlayerCards(mrsPeacockCardSet);
 
-    playerSet = new HashSet<Player>(); 
+    playerSet = new LinkedList<Player>(); 
     playerSet.add(mrsPeacock);
     libraryConservatoryHallway.setOccupyingPlayers(playerSet);
     
@@ -244,13 +244,13 @@ public class CluelessServiceImpl implements CluelessService
     Hallway newConservatoryBallRoomHallway = new Hallway(new Pair(4, 1));
     conservatoryBallRoomHallway = newConservatoryBallRoomHallway;
     
-    Set<Card> mrGreenCardSet = new HashSet<Card>();
+    LinkedList<Card> mrGreenCardSet = new LinkedList<Card>();
     mrGreenCardSet.add(dinningRoom);
     mrGreenCardSet.add(mrsWhite);
     mrGreenCardSet.add(wrench);
     mrGreen.setPlayerCards(mrGreenCardSet);
 
-    playerSet = new HashSet<Player>(); 
+    playerSet = new LinkedList<Player>(); 
     playerSet.add(mrGreen);
     conservatoryBallRoomHallway.setOccupyingPlayers(playerSet);
     
@@ -260,13 +260,13 @@ public class CluelessServiceImpl implements CluelessService
     Hallway newBallRoomKitchenHallway = new Hallway(new Pair(4, 3));
     ballRoomKitchenHallway = newBallRoomKitchenHallway; 
     
-    Set<Card> mrsWhiteCardSet = new HashSet<Card>();
+    LinkedList<Card> mrsWhiteCardSet = new LinkedList<Card>();
     mrsWhiteCardSet.add(lounge);
     mrsWhiteCardSet.add(billardRoom);
     mrsWhiteCardSet.add(mrGreen);
     mrsWhite.setPlayerCards(mrGreenCardSet);
 
-    playerSet = new HashSet<Player>(); 
+    playerSet = new LinkedList<Player>(); 
     playerSet.add(mrsWhite);
     ballRoomKitchenHallway.setOccupyingPlayers(playerSet);
     

@@ -3,6 +3,7 @@
  */
 package edu.jhu.clueless.domain;
 
+import java.util.LinkedList;
 import java.util.Set;
 
 /**
@@ -24,7 +25,7 @@ public class Room extends Location
   }
   
   
-  public Room(Set<Location> connectedLocation, Set<Player> occupyingPlayers,
+  public Room(LinkedList<Location> connectedLocation, LinkedList<Player> occupyingPlayers,
       boolean isOccupied, Pair position, String roomName)
   {
     super(connectedLocation, occupyingPlayers, isOccupied, position);
