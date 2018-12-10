@@ -12,8 +12,13 @@ import java.util.Set;
 public class Player extends Card
 {
   private String playerName;
+<<<<<<< HEAD
   private Location location;
   private Set<Card> playerCards; 
+=======
+  private Set<Card> playerCards; 
+
+>>>>>>> bess/master
   /**
    * No arg constructor
    */
@@ -27,6 +32,15 @@ public class Player extends Card
    * 
    * @param playerName
    */
+  public Player(String playerName, Set<Card> playerCards)
+  {
+    super();
+    this.playerName = playerName;
+    this.playerCards = playerCards;
+  }
+  
+  
+
   public Player(String playerName, Set<Card> playerCards)
   {
     super();
@@ -128,7 +142,7 @@ public class Player extends Card
       return false;
     return true;
   }
-  
+
   
   
 }

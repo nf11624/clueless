@@ -89,6 +89,7 @@ public class InitResponseDTO
   public String getColMustard()
   {
     return colMustard;
+<<<<<<< HEAD
   }
 
   /**
@@ -105,6 +106,48 @@ public class InitResponseDTO
   public String getMrsPeacock()
   {
     return mrsPeacock;
+=======
+  }
+
+  /**
+   * @param colMustard the colMustard to set
+   */
+  public void setColMustard(String colMustard)
+  {
+    this.colMustard = colMustard;
+  }
+
+  /**
+   * @return the mrsPeacock
+   */
+  public String getMrsPeacock()
+  {
+    return mrsPeacock;
+  }
+
+  /**
+   * @param mrsPeacock the mrsPeacock to set
+   */
+  public void setMrsPeacock(String mrsPeacock)
+  {
+    this.mrsPeacock = mrsPeacock;
+  }
+
+  /**
+   * @return the mrGreen
+   */
+  public String getMrGreen()
+  {
+    return mrGreen;
+  }
+
+  /**
+   * @param mrGreen the mrGreen to set
+   */
+  public void setMrGreen(String mrGreen)
+  {
+    this.mrGreen = mrGreen;
+>>>>>>> bess/master
   }
 
   /**

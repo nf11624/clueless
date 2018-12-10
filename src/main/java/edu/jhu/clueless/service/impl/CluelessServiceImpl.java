@@ -158,6 +158,7 @@ public class CluelessServiceImpl implements CluelessService
 
     
     Room newLounge = new Room(new Pair(0, 4));
+    newLounge.setOccupied(false);
     lounge = newLounge;
     
 
@@ -175,9 +176,12 @@ public class CluelessServiceImpl implements CluelessService
 
     playerSet = new HashSet<Player>(); 
     playerSet.add(profPlum);
+    
+    studyLibraryHallway.setOccupied(true);
     studyLibraryHallway.setOccupyingPlayers(playerSet);
     
     Hallway newHallBillardRoomHallway = new Hallway(new Pair(1, 2));
+    newHallBillardRoomHallway.setOccupied(false);
     hallBillardRoomHallway = newHallBillardRoomHallway;
     
     Hallway newLoungeDinningRoomHallway = new Hallway(new Pair(1, 4));
@@ -191,24 +195,31 @@ public class CluelessServiceImpl implements CluelessService
 
     playerSet = new HashSet<Player>(); 
     playerSet.add(colMustard);
+    
+    loungeDinningRoomHallway.setOccupied(true);
     loungeDinningRoomHallway.setOccupyingPlayers(playerSet);
     
     /*
      * Third row
      */
     Room newLibrary = new Room(new Pair(2, 0));
+    newLibrary.setOccupied(false);
     library = newLibrary;
     
     Hallway newLibraryBillardRoomHallway = new Hallway(new Pair(2, 1));
+    newLibraryBillardRoomHallway.setOccupied(false);
     libraryBillardRoomHallway = newLibraryBillardRoomHallway;
     
     Room newBillardRoom = new Room(new Pair(2, 2));
+    newBillardRoom.setOccupied(false);
     billardRoom = newBillardRoom;
     
     Hallway newBillardDinningRoomHallway = new Hallway(new Pair(2, 3));
+    newBillardDinningRoomHallway.setOccupied(false);
     billardDinningRoomHallway = newBillardDinningRoomHallway;
     
     Room newDinningRoom = new Room(new Pair(2, 4));
+    newDinningRoom.setOccupied(false);
     dinningRoom = newDinningRoom;
 
     /*
@@ -226,12 +237,16 @@ public class CluelessServiceImpl implements CluelessService
 
     playerSet = new HashSet<Player>(); 
     playerSet.add(mrsPeacock);
+    
+    libraryConservatoryHallway.setOccupied(true);
     libraryConservatoryHallway.setOccupyingPlayers(playerSet);
     
     Hallway newBillardRoomBallRoomHallway = new Hallway(new Pair(3, 2));
+    newBillardRoomBallRoomHallway.setOccupied(false);
     billardRoomBallRoomHallway = newBillardRoomBallRoomHallway;
     
     Hallway newDinningRoomKitchenHallway = new Hallway(new Pair(3, 4));
+    newDinningRoomKitchenHallway.setOccupied(false);
     dinningRoomKitchenHallway = newDinningRoomKitchenHallway;
     
     
@@ -239,6 +254,7 @@ public class CluelessServiceImpl implements CluelessService
      * Fifth row
      */
     Room newConservatory = new Room(new Pair(4, 0));
+    newConservatory.setOccupied(false);
     conservatory = newConservatory;
     
     Hallway newConservatoryBallRoomHallway = new Hallway(new Pair(4, 1));
@@ -252,9 +268,12 @@ public class CluelessServiceImpl implements CluelessService
 
     playerSet = new HashSet<Player>(); 
     playerSet.add(mrGreen);
+    
+    conservatoryBallRoomHallway.setOccupied(false);
     conservatoryBallRoomHallway.setOccupyingPlayers(playerSet);
     
     Room newBallRoom = new Room(new Pair(4, 2));
+    newBallRoom.setOccupied(false);
     ballRoom = newBallRoom;
     
     Hallway newBallRoomKitchenHallway = new Hallway(new Pair(4, 3));
@@ -268,6 +287,8 @@ public class CluelessServiceImpl implements CluelessService
 
     playerSet = new HashSet<Player>(); 
     playerSet.add(mrsWhite);
+    
+    ballRoomKitchenHallway.setOccupied(true);
     ballRoomKitchenHallway.setOccupyingPlayers(playerSet);
     
     
@@ -278,6 +299,7 @@ public class CluelessServiceImpl implements CluelessService
     
     
     Room newKitchen = new Room(new Pair(4, 4));
+    newKitchen.setOccupied(false);
     kitchen = newKitchen;
   
     /*
