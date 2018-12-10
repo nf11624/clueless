@@ -112,7 +112,10 @@ public class CluelessServiceImpl implements CluelessService
    private static Player mrGreen = new Player("mrGreen", null);
    private static Player mrsWhite = new Player("mrsWhite", null);
    
-   private static Map<Integer, Player> playerMapping;
+   private static Map<Integer, Player> playerMapping = new HashMap<>();
+   private static Map<String, Player> playerNameMapping = new HashMap<>();
+   private static Map<String, Weapon> weaponNameMapping = new HashMap<>();
+   private static Map<String, Location> locationNameMapping = new HashMap<>();
    private static Map<Pair, Location> locationMapping = new HashMap<>();
    /*
     * Initialize Confidential File
@@ -144,16 +147,16 @@ public class CluelessServiceImpl implements CluelessService
     Hallway newHallLoungeHallway = new Hallway(new Pair(0, 3));
     hallLoungeHallway = newHallLoungeHallway;
     
-    Set<Card> missScarletCardSet = new HashSet<Card>();
+    List<Card> missScarletCardSet = new LinkedList<Card>();
     missScarletCardSet.add(kitchen);
     missScarletCardSet.add(conservatory);
     missScarletCardSet.add(mrGreen);
     missScarletCardSet.add(candlestick);
     missScarlet.setPlayerCards(missScarletCardSet);
-
-    Set<Player> playerSet = new HashSet<Player>();    
-    playerSet.add(missScarlet);
-    hallLoungeHallway.setOccupyingPlayers(playerSet);
+    playerNameMapping.put(missScarlet.getPlayerName(), missScarlet);
+    List<Player> playerList = new LinkedList<Player>();    
+    playerList.add(missScarlet);
+    hallLoungeHallway.setOccupyingPlayers(playerList);
     
 
     
@@ -168,17 +171,18 @@ public class CluelessServiceImpl implements CluelessService
     Hallway newStudyLibraryHallway = new Hallway(new Pair(1, 0));
     studyLibraryHallway = newStudyLibraryHallway;
     
-    Set<Card> profPlumCardSet = new HashSet<Card>();
+    List<Card> profPlumCardSet = new LinkedList<Card>();
     profPlumCardSet.add(library);
     profPlumCardSet.add(missScarlet);
     profPlumCardSet.add(rope);
     profPlum.setPlayerCards(profPlumCardSet);
 
-    playerSet = new HashSet<Player>(); 
-    playerSet.add(profPlum);
+    playerNameMapping.put(profPlum.getPlayerName(), profPlum);
+    playerList = new LinkedList<Player>(); 
+    playerList.add(profPlum);
     
     studyLibraryHallway.setOccupied(true);
-    studyLibraryHallway.setOccupyingPlayers(playerSet);
+    studyLibraryHallway.setOccupyingPlayers(playerList);
     
     Hallway newHallBillardRoomHallway = new Hallway(new Pair(1, 2));
     newHallBillardRoomHallway.setOccupied(false);
@@ -187,17 +191,18 @@ public class CluelessServiceImpl implements CluelessService
     Hallway newLoungeDinningRoomHallway = new Hallway(new Pair(1, 4));
     loungeDinningRoomHallway = newLoungeDinningRoomHallway;
     
-    Set<Card> colMustardCardSet = new HashSet<Card>();
+    List<Card> colMustardCardSet = new LinkedList<Card>();
     colMustardCardSet.add(hall);
     colMustardCardSet.add(mrsPeacock);
     colMustardCardSet.add(leadPipe);
     colMustard.setPlayerCards(colMustardCardSet);
+    playerNameMapping.put(colMustard.getPlayerName(), colMustard);
 
-    playerSet = new HashSet<Player>(); 
-    playerSet.add(colMustard);
+    playerList = new LinkedList<Player>(); 
+    playerList.add(colMustard);
     
     loungeDinningRoomHallway.setOccupied(true);
-    loungeDinningRoomHallway.setOccupyingPlayers(playerSet);
+    loungeDinningRoomHallway.setOccupyingPlayers(playerList);
     
     /*
      * Third row
@@ -229,17 +234,17 @@ public class CluelessServiceImpl implements CluelessService
     libraryConservatoryHallway = newLibraryConservatoryHallway;
 
     
-    Set<Card> mrsPeacockCardSet = new HashSet<Card>();
+    List<Card> mrsPeacockCardSet = new LinkedList<Card>();
     mrsPeacockCardSet.add(study);
     mrsPeacockCardSet.add(colMustard);
     mrsPeacockCardSet.add(knife);
     mrsPeacock.setPlayerCards(mrsPeacockCardSet);
-
-    playerSet = new HashSet<Player>(); 
-    playerSet.add(mrsPeacock);
+    playerNameMapping.put(mrsPeacock.getPlayerName(), mrsPeacock);
+    playerList = new LinkedList<Player>(); 
+    playerList.add(mrsPeacock);
     
     libraryConservatoryHallway.setOccupied(true);
-    libraryConservatoryHallway.setOccupyingPlayers(playerSet);
+    libraryConservatoryHallway.setOccupyingPlayers(playerList);
     
     Hallway newBillardRoomBallRoomHallway = new Hallway(new Pair(3, 2));
     newBillardRoomBallRoomHallway.setOccupied(false);
@@ -260,17 +265,17 @@ public class CluelessServiceImpl implements CluelessService
     Hallway newConservatoryBallRoomHallway = new Hallway(new Pair(4, 1));
     conservatoryBallRoomHallway = newConservatoryBallRoomHallway;
     
-    Set<Card> mrGreenCardSet = new HashSet<Card>();
+    List<Card> mrGreenCardSet = new LinkedList<Card>();
     mrGreenCardSet.add(dinningRoom);
     mrGreenCardSet.add(mrsWhite);
     mrGreenCardSet.add(wrench);
     mrGreen.setPlayerCards(mrGreenCardSet);
-
-    playerSet = new HashSet<Player>(); 
-    playerSet.add(mrGreen);
+    playerNameMapping.put(mrGreen.getPlayerName(), mrGreen);
+    playerList = new LinkedList<Player>(); 
+    playerList.add(mrGreen);
     
     conservatoryBallRoomHallway.setOccupied(false);
-    conservatoryBallRoomHallway.setOccupyingPlayers(playerSet);
+    conservatoryBallRoomHallway.setOccupyingPlayers(playerList);
     
     Room newBallRoom = new Room(new Pair(4, 2));
     newBallRoom.setOccupied(false);
@@ -279,17 +284,17 @@ public class CluelessServiceImpl implements CluelessService
     Hallway newBallRoomKitchenHallway = new Hallway(new Pair(4, 3));
     ballRoomKitchenHallway = newBallRoomKitchenHallway; 
     
-    Set<Card> mrsWhiteCardSet = new HashSet<Card>();
+    List<Card> mrsWhiteCardSet = new LinkedList<Card>();
     mrsWhiteCardSet.add(lounge);
     mrsWhiteCardSet.add(billardRoom);
     mrsWhiteCardSet.add(mrGreen);
     mrsWhite.setPlayerCards(mrGreenCardSet);
-
-    playerSet = new HashSet<Player>(); 
-    playerSet.add(mrsWhite);
+    playerNameMapping.put(mrsWhite.getPlayerName(), mrsWhite);
+    playerList = new LinkedList<Player>(); 
+    playerList.add(mrsWhite);
     
     ballRoomKitchenHallway.setOccupied(true);
-    ballRoomKitchenHallway.setOccupyingPlayers(playerSet);
+    ballRoomKitchenHallway.setOccupyingPlayers(playerList);
     
     
     
@@ -328,6 +333,22 @@ public class CluelessServiceImpl implements CluelessService
     locationMapping.put(studyHallHallway.getPosition(), studyHallHallway);
     locationMapping.put(studyLibraryHallway.getPosition(), studyLibraryHallway);
     
+    locationNameMapping.put(kitchen.getRoomName(), kitchen);
+    locationNameMapping.put(ballRoom.getRoomName(), ballRoom);
+    locationNameMapping.put(conservatory.getRoomName(), conservatory);
+    locationNameMapping.put(study.getRoomName(), study);
+    locationNameMapping.put(hall.getRoomName(), hall);
+    locationNameMapping.put(billardRoom.getRoomName(), billardRoom);
+    locationNameMapping.put(library.getRoomName(), library);
+    locationNameMapping.put(dinningRoom.getRoomName(), dinningRoom);
+    locationNameMapping.put(lounge.getRoomName(), lounge);
+    
+    weaponNameMapping.put(revolver.getWeaponName(), revolver);
+    weaponNameMapping.put(candlestick.getWeaponName(), candlestick);
+    weaponNameMapping.put(rope.getWeaponName(), rope);
+    weaponNameMapping.put(knife.getWeaponName(), knife);
+    weaponNameMapping.put(leadPipe.getWeaponName(), leadPipe);
+    weaponNameMapping.put(wrench.getWeaponName(), wrench);
     
     ConfidentialFile newConfidentialFile = createNewConfidentialFile();
     myConfidentialFile = newConfidentialFile;
@@ -466,13 +487,13 @@ public class CluelessServiceImpl implements CluelessService
   {
     ConfidentialFile suggestion = new ConfidentialFile();
     
-    Player suggestedPlayer = new Player(mySuggestRequestDTO.getSuggestedPlayerName());
+    Player suggestedPlayer = playerNameMapping.get(mySuggestRequestDTO.getSuggestedPlayerName());
     suggestion.setMurderingPlayer(suggestedPlayer);
     
-    Room suggestedRoom = new Room(mySuggestRequestDTO.getSuggestedRoomName());
+    Room suggestedRoom = (Room) locationNameMapping.get(mySuggestRequestDTO.getSuggestedRoomName());
     suggestion.setMurderLocation(suggestedRoom);
     
-    Weapon suggestedWeapon = new Weapon(mySuggestRequestDTO.getSuggestedWeaponName());
+    Weapon suggestedWeapon = weaponNameMapping.get(mySuggestRequestDTO.getSuggestedWeaponName());
     suggestion.setMurderWeapon(suggestedWeapon);
     
     SuggestResponseDTO mySuggestResponseDTO = new SuggestResponseDTO();
@@ -509,7 +530,7 @@ public class CluelessServiceImpl implements CluelessService
 	  Location l = p.getLocation();
 	  LegalMovesDTO dto = new LegalMovesDTO();
 	  List<Location> legalMoveLocations = new LinkedList<>();
-	  for (Location possibleMove : l.getConnectedLocation()) {
+	  for (Location possibleMove : l.getConnectedLocations()) {
 		  if (possibleMove instanceof Hallway) {
 			  if (!possibleMove.isOccupied()) {
 				  legalMoveLocations.add(possibleMove);

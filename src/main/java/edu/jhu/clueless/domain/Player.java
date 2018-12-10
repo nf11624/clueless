@@ -3,7 +3,8 @@
  */
 package edu.jhu.clueless.domain;
 
-import java.util.Set;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author davidbess
@@ -13,7 +14,7 @@ public class Player extends Card
 {
   private String playerName;
   private Location location;
-  private LinkedList<Card> playerCards; 
+  private List<Card> playerCards; 
   /**
    * No arg constructor
    */
@@ -27,7 +28,7 @@ public class Player extends Card
    * 
    * @param playerName
    */
-  public Player(String playerName, LinkedList<Card> playerCards)
+  public Player(String playerName, List<Card> playerCards)
   {
     super();
     this.playerName = playerName;
@@ -39,7 +40,7 @@ public class Player extends Card
 
 
   public Player(String playerName, Location location,
-      LinkedList<Card> playerCards)
+      List<Card> playerCards)
   {
     this.playerName = playerName;
     this.location = location;
@@ -65,7 +66,7 @@ public class Player extends Card
   /**
    * @return the playerCards
    */
-  public LinkedList<Card> getPlayerCards()
+  public List<Card> getPlayerCards()
   {
     return playerCards;
   }
@@ -73,7 +74,7 @@ public class Player extends Card
   /**
    * @param playerCards the playerCards to set
    */
-  public void setPlayerCards(LinkedList<Card> playerCards)
+  public void setPlayerCards(List<Card> playerCards)
   {
     this.playerCards = playerCards;
   }
@@ -98,14 +99,6 @@ public class Player extends Card
   {
     return "Player [playerName=" + playerName + ", location=" + location
         + ", playerCards=" + playerCards + "]";
-  }
-
-  public Location getLocation() {
-	  return location;
-  }
-  
-  public void setLocation(Location location) {
-	  this.location = location;
   }
   
   /* (non-Javadoc)

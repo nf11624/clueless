@@ -3,11 +3,7 @@
  */
 package edu.jhu.clueless.domain;
 
-<<<<<<< HEAD
-=======
-import java.util.LinkedList;
->>>>>>> refs/remotes/bess/master
-import java.util.Set;
+import java.util.List;
 
 /**
  * @author davidbess
@@ -15,8 +11,8 @@ import java.util.Set;
  */
 public abstract class Location extends Card
 {
-  protected LinkedList<Location> connectedLocations;
-  protected LinkedList<Player> occupyingPlayers;
+  protected List<Location> connectedLocations;
+  protected List<Player> occupyingPlayers;
   protected boolean isOccupied;
   
   /*
@@ -38,7 +34,7 @@ public abstract class Location extends Card
     this.position = position;
   };
   
-<<<<<<< HEAD
+
   /**
    * 
    *  Constructor using arguments 
@@ -48,14 +44,9 @@ public abstract class Location extends Card
    * @param isOccupied
    * @param position
    */
-  public Location(Set<Location> connectedLocation,
-      Set<Player> occupyingPlayers, boolean isOccupied, Pair position)
-=======
 
-  
-  public Location(LinkedList<Location> connectedLocations,
-      LinkedList<Player> occupyingPlayers, boolean isOccupied, Pair position)
->>>>>>> refs/remotes/bess/master
+  public Location(List<Location> connectedLocations,
+      List<Player> occupyingPlayers, boolean isOccupied, Pair position)
   {
     super();
     this.connectedLocations = connectedLocations;
@@ -67,7 +58,7 @@ public abstract class Location extends Card
   /**
    * @return the connectedLocation
    */
-  public LinkedList<Location> getConnectedLocations()
+  public List<Location> getConnectedLocations()
   {
     return connectedLocations;
   }
@@ -75,7 +66,7 @@ public abstract class Location extends Card
   /**
    * @param connectedLocation the connectedLocation to set
    */
-  public void setConnectedLocation(LinkedList<Location> connectedLocations)
+  public void setConnectedLocation(List<Location> connectedLocations)
   {
     this.connectedLocations = connectedLocations;
   }
@@ -83,7 +74,7 @@ public abstract class Location extends Card
   /**
    * @return the occupyingPlayers
    */
-  public LinkedList<Player> getOccupyingPlayers()
+  public List<Player> getOccupyingPlayers()
   {
     return occupyingPlayers;
   }
@@ -91,7 +82,7 @@ public abstract class Location extends Card
   /**
    * @param occupyingPlayers the occupyingPlayers to set
    */
-  public void setOccupyingPlayers(LinkedList<Player> occupyingPlayers)
+  public void setOccupyingPlayers(List<Player> occupyingPlayers)
   {
     this.occupyingPlayers = occupyingPlayers;
     for (Player p : occupyingPlayers) {
@@ -157,14 +148,9 @@ public abstract class Location extends Card
   {
     return "Location [connectedLocation=" + connectedLocations
         + ", occupyingPlayers=" + occupyingPlayers + ", isOccupied="
-<<<<<<< HEAD
-        + isOccupied + ", position=(" + position.getKey() + "," + position.getValue() + ")]";
-=======
         + isOccupied + ", position=" + position + "]";
->>>>>>> refs/remotes/bess/master
   }
 
-<<<<<<< HEAD
   /* (non-Javadoc)
    * @see java.lang.Object#hashCode()
    */
@@ -174,15 +160,14 @@ public abstract class Location extends Card
     final int prime = 31;
     int result = 1;
     result = prime * result
-        + ((connectedLocation == null) ? 0 : connectedLocation.hashCode());
+        + ((connectedLocations == null) ? 0 : connectedLocations.hashCode());
     result = prime * result + (isOccupied ? 1231 : 1237);
     result = prime * result
         + ((occupyingPlayers == null) ? 0 : occupyingPlayers.hashCode());
     result = prime * result + position.hashCode();
     return result;
   }
-=======
->>>>>>> refs/remotes/bess/master
+
 
   /* (non-Javadoc)
    * @see java.lang.Object#equals(java.lang.Object)
@@ -213,16 +198,13 @@ public abstract class Location extends Card
     }
     else if (!occupyingPlayers.equals(other.occupyingPlayers))
       return false;
-<<<<<<< HEAD
-    if (position.equals(other.position))
-=======
+
     if (position == null)
     {
       if (other.position != null)
         return false;
     }
     else if (!position.equals(other.position))
->>>>>>> refs/remotes/bess/master
       return false;
     return true;
   }
