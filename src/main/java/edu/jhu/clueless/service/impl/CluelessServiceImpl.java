@@ -352,8 +352,32 @@ public class CluelessServiceImpl implements CluelessService
   public SuggestResponseDTO suggest(SuggestRequestDTO mySuggestRequestDTO)
       throws IOException, JSONException
   {
-    // TODO Auto-generated method stub
-    return null;
+    ConfidentialFile suggestion = new ConfidentialFile();
+    
+    Player suggestedPlayer = new Player(mySuggestRequestDTO.getSuggestedPlayerName());
+    suggestion.setMurderingPlayer(suggestedPlayer);
+    
+    Room suggestedRoom = new Room(mySuggestRequestDTO.getSuggestedRoomName());
+    suggestion.setMurderLocation(suggestedRoom);
+    
+    Weapon suggestedWeapon = new Weapon(mySuggestRequestDTO.getSuggestedWeaponName());
+    suggestion.setMurderWeapon(suggestedWeapon);
+    
+    SuggestResponseDTO mySuggestResponseDTO = new SuggestResponseDTO();
+    
+    if(suggestion.getMurderingPlayer().getPlayerName() == myConfidentialFile.getMurderingPlayer().getPlayerName() &&
+        suggestion.getMurderLocation().getRoomName() == myConfidentialFile.getMurderLocation().getRoomName() && 
+        suggestion.getMurderWeapon().getWeaponName() == myConfidentialFile.getMurderWeapon().getWeaponName())
+    {
+      mySuggestResponseDTO.setResult("true");
+      mySuggestResponseDTO.setCardRevealMessage("No cards revealed");
+    }
+    else
+    {
+      mySuggestResponseDTO.setResult("false");
+    }
+
+    return mySuggestResponseDTO;
   }
 
   

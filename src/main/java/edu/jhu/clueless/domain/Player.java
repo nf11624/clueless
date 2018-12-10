@@ -24,6 +24,16 @@ public class Player extends Card
   };
   
   /**
+   * 
+   * @param playerName
+   */
+  public Player(String playerName)
+  {
+    this.playerName = playerName;
+  }
+  
+  
+  /**
    * Constructor using arguments
    * 
    * @param playerName

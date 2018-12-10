@@ -24,6 +24,11 @@ public class Room extends Location
     super(position);
   }
   
+  public Room(String roomName)
+  {
+    this.roomName = roomName;
+  }
+  
   
   public Room(LinkedList<Location> connectedLocation, LinkedList<Player> occupyingPlayers,
       boolean isOccupied, Pair position, String roomName)
