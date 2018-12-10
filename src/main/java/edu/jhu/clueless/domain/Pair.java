@@ -12,24 +12,24 @@ public class Pair implements Entry<Integer, Integer> {
 		this.y = y;
 	}
 	
-	public Integer getX() {
+	public Integer getRow() {
 		return x;
 	}
 	
-	public Integer getY() {
+	public Integer getColumn() {
 		return y;
 	}
 
 	@Override
 	public Integer getKey() {
 		// TODO Auto-generated method stub
-		return getX();
+		return getRow();
 	}
 
 	@Override
 	public Integer getValue() {
 		// TODO Auto-generated method stub
-		return getY();
+		return getColumn();
 	}
 
 	@Override

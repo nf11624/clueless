@@ -59,7 +59,7 @@ public class Room extends Location
   @Override
   public String toString()
   {
-    return "Location [connectedLocation=" + connectedLocation
+    return "Location [connectedLocation=" + connectedLocations
         + ", occupyingPlayers=" + occupyingPlayers + ", isOccupied="
         + isOccupied + ", position=" + position + ", "
             + "roomName=" + roomName + "]";

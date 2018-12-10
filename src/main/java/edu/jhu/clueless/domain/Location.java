@@ -12,7 +12,7 @@ import java.util.Set;
  */
 public abstract class Location extends Card
 {
-  protected LinkedList<Location> connectedLocation;
+  protected LinkedList<Location> connectedLocations;
   protected LinkedList<Player> occupyingPlayers;
   protected boolean isOccupied;
   
@@ -37,11 +37,11 @@ public abstract class Location extends Card
   
 
   
-  public Location(LinkedList<Location> connectedLocation,
+  public Location(LinkedList<Location> connectedLocations,
       LinkedList<Player> occupyingPlayers, boolean isOccupied, Pair position)
   {
     super();
-    this.connectedLocation = connectedLocation;
+    this.connectedLocations = connectedLocations;
     this.occupyingPlayers = occupyingPlayers;
     this.isOccupied = isOccupied;
     this.position = position;
@@ -50,17 +50,17 @@ public abstract class Location extends Card
   /**
    * @return the connectedLocation
    */
-  public LinkedList<Location> getConnectedLocation()
+  public LinkedList<Location> getConnectedLocations()
   {
-    return connectedLocation;
+    return connectedLocations;
   }
 
   /**
    * @param connectedLocation the connectedLocation to set
    */
-  public void setConnectedLocation(LinkedList<Location> connectedLocation)
+  public void setConnectedLocation(LinkedList<Location> connectedLocations)
   {
-    this.connectedLocation = connectedLocation;
+    this.connectedLocations = connectedLocations;
   }
 
   /**
@@ -77,6 +77,22 @@ public abstract class Location extends Card
   public void setOccupyingPlayers(LinkedList<Player> occupyingPlayers)
   {
     this.occupyingPlayers = occupyingPlayers;
+  }
+  
+  /**
+   * @param occupyingPlayer the occupyingPlayer to remove
+   */
+  public void removeOccupyingPlayer(Player occupyingPlayer)
+  {
+    occupyingPlayers.remove(occupyingPlayer);
+  }
+  
+  /**
+   * @param occupyingPlayer the occupyingPlayer to add
+   */
+  public void addOccupyingPlayer(Player occupyingPlayer)
+  {
+    occupyingPlayers.add(occupyingPlayer);
   }
 
   /**
@@ -117,7 +133,7 @@ public abstract class Location extends Card
   @Override
   public String toString()
   {
-    return "Location [connectedLocation=" + connectedLocation
+    return "Location [connectedLocation=" + connectedLocations
         + ", occupyingPlayers=" + occupyingPlayers + ", isOccupied="
         + isOccupied + ", position=" + position + "]";
   }
@@ -136,12 +152,12 @@ public abstract class Location extends Card
     if (getClass() != obj.getClass())
       return false;
     Location other = (Location) obj;
-    if (connectedLocation == null)
+    if (connectedLocations == null)
     {
-      if (other.connectedLocation != null)
+      if (other.connectedLocations != null)
         return false;
     }
-    else if (!connectedLocation.equals(other.connectedLocation))
+    else if (!connectedLocations.equals(other.connectedLocations))
       return false;
     if (isOccupied != other.isOccupied)
       return false;

@@ -35,7 +35,7 @@ public class Hallway extends Location
   @Override
   public String toString()
   {
-    return "Location [connectedLocation=" + connectedLocation
+    return "Location [connectedLocation=" + connectedLocations
         + ", occupyingPlayers=" + occupyingPlayers + ", isOccupied="
         + isOccupied + ", position=" + position.toString() + "]";
   }
