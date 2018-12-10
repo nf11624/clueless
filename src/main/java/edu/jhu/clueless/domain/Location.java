@@ -122,22 +122,6 @@ public abstract class Location extends Card
         + isOccupied + ", position=" + position + "]";
   }
 
-  /* (non-Javadoc)
-   * @see java.lang.Object#hashCode()
-   */
-  @Override
-  public int hashCode()
-  {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result
-        + ((connectedLocation == null) ? 0 : connectedLocation.hashCode());
-    result = prime * result + (isOccupied ? 1231 : 1237);
-    result = prime * result
-        + ((occupyingPlayers == null) ? 0 : occupyingPlayers.hashCode());
-    result = prime * result + ((position == null) ? 0 : position.hashCode());
-    return result;
-  }
 
   /* (non-Javadoc)
    * @see java.lang.Object#equals(java.lang.Object)

@@ -60,17 +60,7 @@ public class Room extends Location
             + "roomName=" + roomName + "]";
   }
 
-  /* (non-Javadoc)
-   * @see java.lang.Object#hashCode()
-   */
-  @Override
-  public int hashCode()
-  {
-    final int prime = 31;
-    int result = super.hashCode();
-    result = prime * result + ((roomName == null) ? 0 : roomName.hashCode());
-    return result;
-  }
+
 
   /* (non-Javadoc)
    * @see java.lang.Object#equals(java.lang.Object)

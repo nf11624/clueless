@@ -108,24 +108,6 @@ public class Player extends Card
 
 
   /* (non-Javadoc)
-   * @see java.lang.Object#hashCode()
-   */
-  @Override
-  public int hashCode()
-  {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((location == null) ? 0 : location.hashCode());
-    result = prime * result
-        + ((playerCards == null) ? 0 : playerCards.hashCode());
-    result = prime * result
-        + ((playerName == null) ? 0 : playerName.hashCode());
-    return result;
-  }
-
-
-
-  /* (non-Javadoc)
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
