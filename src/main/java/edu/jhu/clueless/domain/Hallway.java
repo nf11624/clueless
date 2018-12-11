@@ -4,9 +4,8 @@
 package edu.jhu.clueless.domain;
 
 
-import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * @author davidbess
@@ -25,9 +24,15 @@ public class Hallway extends Location
   {
     super(position);
   }
+  
+  public Hallway(String name, Pair position) {
+	  this.name = name;
+	  this.position = position;
+	  this.occupied = false;
+  }
 
-  public Hallway(LinkedList<Location> connectedLocation,
-      LinkedList<Player> occupyingPlayers, boolean isOccupied, Pair position)
+  public Hallway(Set<Location> connectedLocation,
+      List<Player> occupyingPlayers, boolean isOccupied, Pair position)
   {
     super(connectedLocation, occupyingPlayers, isOccupied, position);
   }

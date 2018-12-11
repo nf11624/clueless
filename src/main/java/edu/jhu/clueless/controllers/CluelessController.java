@@ -71,28 +71,28 @@ public class CluelessController
     }
     
     @PostMapping("/move")
-    ResponseEntity<MoveResponseDTO> move(@RequestBody MoveRequestDTO myMoveRequestDTO) throws IOException, JSONException 
+    ResponseEntity<MoveResponseDTO> move(MoveRequestDTO myMoveRequestDTO) throws IOException, JSONException 
     {
       MoveResponseDTO result = myCluelessService.move(myMoveRequestDTO);
       return ResponseEntity.ok().body(result);
     }
     
     @PostMapping("/endturn")
-    ResponseEntity<EndTurnResponseDTO> move(@RequestBody EndTurnRequestDTO myEndTurnRequestDTO) throws IOException, JSONException 
+    ResponseEntity<EndTurnResponseDTO> move(EndTurnRequestDTO myEndTurnRequestDTO) throws IOException, JSONException 
     {
       EndTurnResponseDTO result = myCluelessService.endTurn(myEndTurnRequestDTO);
       return ResponseEntity.ok().body(result);
     }
     
     @PostMapping("/accuse")
-    ResponseEntity<AccuseResponseDTO> move(@RequestBody AccuseRequestDTO myAccuseRequestDTO) throws IOException, JSONException 
+    ResponseEntity<AccuseResponseDTO> move(AccuseRequestDTO myAccuseRequestDTO) throws IOException, JSONException 
     {
       AccuseResponseDTO result = myCluelessService.accuse(myAccuseRequestDTO);
       return ResponseEntity.ok().body(result);
     }
     
     @PostMapping("/suggest")
-    ResponseEntity<SuggestResponseDTO> move(@RequestBody SuggestRequestDTO mySuggestRequestDTO) throws IOException, JSONException 
+    ResponseEntity<SuggestResponseDTO> move(SuggestRequestDTO mySuggestRequestDTO) throws IOException, JSONException 
     {
       SuggestResponseDTO result = myCluelessService.suggest(mySuggestRequestDTO);
       return ResponseEntity.ok().body(result);

@@ -3,6 +3,8 @@
  */
 package edu.jhu.clueless.DTO;
 
+import edu.jhu.clueless.domain.Player;
+
 /**
  * @author davidbess
  *
@@ -11,11 +13,12 @@ public class InitResponseDTO
 {
   
   private String statusMessage;
-  private String missScarlet;
-  private String profPlum;
-  private String colMustard;
-  private String mrsPeacock;
-  private String mrGreen;
+  private Player missScarlet;
+  private Player profPlum;
+  private Player colMustard;
+  private Player mrsPeacock;
+  private Player mrGreen;
+  private Player mrsWhite;
   
   public InitResponseDTO() {}
 
@@ -24,8 +27,8 @@ public class InitResponseDTO
     this.statusMessage = statusMessage;
   }
 
-  public InitResponseDTO(String statusMessage, String missScarlet,
-      String profPlum, String colMustard, String mrsPeacock, String mrGreen)
+  public InitResponseDTO(String statusMessage, Player missScarlet,
+      Player profPlum, Player colMustard, Player mrsPeacock, Player mrGreen, Player mrsWhite)
   {
     this.statusMessage = statusMessage;
     this.missScarlet = missScarlet;
@@ -33,6 +36,7 @@ public class InitResponseDTO
     this.colMustard = colMustard;
     this.mrsPeacock = mrsPeacock;
     this.mrGreen = mrGreen;
+    this.mrsWhite = mrsWhite;
   }
 
   /**
@@ -54,7 +58,7 @@ public class InitResponseDTO
   /**
    * @return the missScarlet
    */
-  public String getMissScarlet()
+  public Player getMissScarlet()
   {
     return missScarlet;
   }
@@ -62,7 +66,7 @@ public class InitResponseDTO
   /**
    * @param missScarlet the missScarlet to set
    */
-  public void setMissScarlet(String missScarlet)
+  public void setMissScarlet(Player missScarlet)
   {
     this.missScarlet = missScarlet;
   }
@@ -70,7 +74,7 @@ public class InitResponseDTO
   /**
    * @return the profPlum
    */
-  public String getProfPlum()
+  public Player getProfPlum()
   {
     return profPlum;
   }
@@ -78,7 +82,7 @@ public class InitResponseDTO
   /**
    * @param profPlum the profPlum to set
    */
-  public void setProfPlum(String profPlum)
+  public void setProfPlum(Player profPlum)
   {
     this.profPlum = profPlum;
   }
@@ -86,7 +90,7 @@ public class InitResponseDTO
   /**
    * @return the colMustard
    */
-  public String getColMustard()
+  public Player getColMustard()
   {
     return colMustard;
   }
@@ -95,7 +99,7 @@ public class InitResponseDTO
   /**
    * @param colMustard the colMustard to set
    */
-  public void setColMustard(String colMustard)
+  public void setColMustard(Player colMustard)
   {
     this.colMustard = colMustard;
   }
@@ -103,7 +107,7 @@ public class InitResponseDTO
   /**
    * @return the mrsPeacock
    */
-  public String getMrsPeacock()
+  public Player getMrsPeacock()
   {
     return mrsPeacock;
   }
@@ -111,7 +115,7 @@ public class InitResponseDTO
   /**
    * @param mrsPeacock the mrsPeacock to set
    */
-  public void setMrsPeacock(String mrsPeacock)
+  public void setMrsPeacock(Player mrsPeacock)
   {
     this.mrsPeacock = mrsPeacock;
   }
@@ -119,7 +123,7 @@ public class InitResponseDTO
   /**
    * @return the mrGreen
    */
-  public String getMrGreen()
+  public Player getMrGreen()
   {
     return mrGreen;
   }
@@ -127,13 +131,22 @@ public class InitResponseDTO
   /**
    * @param mrGreen the mrGreen to set
    */
-  public void setMrGreen(String mrGreen)
+  public void setMrGreen(Player mrGreen)
   {
     this.mrGreen = mrGreen;
   }
 
-  public String toString() {
+  public String String() {
 	  return statusMessage;
   }
+  
+  public void setMrsWhite(Player mrsWhite) {
+	  this.mrsWhite = mrsWhite;
+  }
+  
+  public Player getMrsWhite() { 
+	  return mrsWhite;
+  }
+  
   
 }

@@ -11,6 +11,8 @@ public class MoveRequestDTO
 {
   private int player;
   private int direction;
+  private String room;
+  
   public MoveRequestDTO()
   {
 	  
@@ -46,5 +48,13 @@ public class MoveRequestDTO
   public void setDirection(int direction)
   {
   	this.direction = direction;
+  }
+  
+  public String getRoom() {
+	  return room;
+  }
+  
+  public void setRoom(String room) {
+	  this.room = room;
   }
 }

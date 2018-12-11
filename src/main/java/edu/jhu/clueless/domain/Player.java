@@ -3,9 +3,11 @@
  */
 package edu.jhu.clueless.domain;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
  * @author davidbess
@@ -15,6 +17,7 @@ public class Player extends Card
 {
   private String playerName;
   private Location location;
+  @JsonBackReference
   private List<Card> playerCards; 
   /**
    * No arg constructor
@@ -31,7 +34,7 @@ public class Player extends Card
    */
   public Player(String playerName, List<Card> playerCards)
   {
-    super();
+    this.name = playerName;
     this.playerName = playerName;
     this.playerCards = playerCards;
   }
@@ -62,6 +65,7 @@ public class Player extends Card
   public void setPlayerName(String playerName)
   {
     this.playerName = playerName;
+    this.name = playerName;
   }
 
   /**
@@ -113,9 +117,10 @@ public class Player extends Card
     final int prime = 31;
     int result = 1;
     result = prime * result
-        + ((playerCards == null) ? 0 : playerCards.hashCode());
+        + ((playerCards == null) ? 0 : playerCards.size());
     result = prime * result
         + ((playerName == null) ? 0 : playerName.hashCode());
+    result = prime * result;
     return result;
   }
 
