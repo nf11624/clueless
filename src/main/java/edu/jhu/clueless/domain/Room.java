@@ -29,6 +29,7 @@ public class Room extends Location
 	  this.name = name;
 	  this.roomName = name;
 	  this.position = position;
+//	  this.location = this;
   }
   
   public Room(Set<Location> connectedLocation, List<Player> occupyingPlayers,

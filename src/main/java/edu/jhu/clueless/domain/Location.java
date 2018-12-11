@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
@@ -18,9 +19,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public abstract class Location extends Card
 {
 
-	@JsonManagedReference
+	@JsonIgnore
 	protected Set<Location> connectedLocations = new HashSet<>();
-	@JsonManagedReference
+	@JsonIgnore
 	protected List<Player> occupyingPlayers = new LinkedList<>();
 	protected boolean occupied = false;
 
@@ -28,6 +29,7 @@ public abstract class Location extends Card
 	 * 5 by 5 grid.  rows with rooms are full, 
 	 * rows with only hallway have some sparsity. 
 	 */
+	@JsonIgnore
 	protected Pair position; 
 
 	/**

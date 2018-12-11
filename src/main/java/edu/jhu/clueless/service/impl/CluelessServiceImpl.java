@@ -21,6 +21,7 @@ import edu.jhu.clueless.DTO.InitResponseDTO;
 import edu.jhu.clueless.DTO.LegalMovesDTO;
 import edu.jhu.clueless.DTO.MoveRequestDTO;
 import edu.jhu.clueless.DTO.MoveResponseDTO;
+import edu.jhu.clueless.DTO.StatusResponseDTO;
 import edu.jhu.clueless.DTO.SuggestRequestDTO;
 import edu.jhu.clueless.DTO.SuggestResponseDTO;
 import edu.jhu.clueless.domain.Card;
@@ -163,6 +164,14 @@ public class CluelessServiceImpl implements CluelessService
 		conservatoryBallRoomHallway = new Hallway("Conservatory - Ball Room Hallway", new Pair(4, 1));   
 		kitchen = new Room("Kitchen", new Pair(4, 4));
 		
+		// Add locations to weapons
+		knife.setLocation(kitchen);
+		rope.setLocation(hall);
+		candlestick.setLocation(ballRoom);
+		leadPipe.setLocation(library);
+		wrench.setLocation(diningRoom);
+		revolver.setLocation(study);
+		
 		/*****
 		// Player initialization
 		*/
@@ -265,6 +274,7 @@ public class CluelessServiceImpl implements CluelessService
 		billiardRoom.addConnectedLocation(librarybilliardRoomHallway);
 		billiardRoom.addConnectedLocation(hallbilliardRoomHallway);
 
+		// Rooms
 		locationNameMapping.put(kitchen.getRoomName(), kitchen);
 		locationNameMapping.put(ballRoom.getRoomName(), ballRoom);
 		locationNameMapping.put(conservatory.getRoomName(), conservatory);
@@ -274,6 +284,25 @@ public class CluelessServiceImpl implements CluelessService
 		locationNameMapping.put(library.getRoomName(), library);
 		locationNameMapping.put(diningRoom.getRoomName(), diningRoom);
 		locationNameMapping.put(lounge.getRoomName(), lounge);
+		// Hallways
+		// Billiard Room
+		locationNameMapping.put(billiarddiningRoomHallway.getName(), loungediningRoomHallway);
+		locationNameMapping.put(billiardRoomBallRoomHallway.getName(), loungediningRoomHallway);
+		locationNameMapping.put(hallbilliardRoomHallway.getName(), loungediningRoomHallway);
+		locationNameMapping.put(librarybilliardRoomHallway.getName(), loungediningRoomHallway);
+		// Lounge
+		locationNameMapping.put(loungediningRoomHallway.getName(), loungediningRoomHallway);
+		locationNameMapping.put(hallLoungeHallway.getName(), hallLoungeHallway);
+		// Study
+		locationNameMapping.put(studyHallHallway.getName(), loungediningRoomHallway);
+		locationNameMapping.put(studyLibraryHallway.getName(), loungediningRoomHallway);
+		// conservatory
+		locationNameMapping.put(conservatoryBallRoomHallway.getName(), loungediningRoomHallway);
+		locationNameMapping.put(libraryConservatoryHallway.getName(), loungediningRoomHallway);
+		// kitchen
+		locationNameMapping.put(diningRoomKitchenHallway.getName(), loungediningRoomHallway);
+		locationNameMapping.put(ballRoomKitchenHallway.getName(), loungediningRoomHallway);
+		
 
 		weaponNameMapping.put(revolver.getWeaponName(), revolver);
 		weaponNameMapping.put(candlestick.getWeaponName(), candlestick);
@@ -324,26 +353,26 @@ public class CluelessServiceImpl implements CluelessService
 
 		MoveResponseDTO response = new MoveResponseDTO("Initial Response");
 
-		// Determine if the move lands the player on the board
-		if (requestedLocation == null)
-		{
-			response.setMessage("The requested direction is invalid given your position.");
-			return response;
-		}
+//		// Determine if the move lands the player on the board
+//		if (requestedLocation == null)
+//		{
+//			response.setMessage("The requested direction is invalid given your position.");
+//			return response;
+//		}
 
-		// Check if the requested direction is occupied
-		if (requestedLocation.isOccupied())
-		{
-			response.setMessage("The requested location is currently occupied by another player.");
-			return response;
-		}
+//		// Check if the requested direction is occupied
+//		if (requestedLocation.isOccupied())
+//		{
+//			response.setMessage("The requested location is currently occupied by another player.");
+//			return response;
+//		}
 
 		// The move is valid and the location is not occupied so we may move the player
 		currentLocation.removeOccupyingPlayer(player);
 		player.setLocation(requestedLocation);
 		requestedLocation.addOccupyingPlayer(player);
 
-		response.setMessage(player.getPlayerName() + "has moved successfully.");
+		response.setMessage(player.getPlayerName() + " has moved successfully to the " + requestedLocation.getName() + ".");
 		response.setResult(true);
 		return response;
 	}
@@ -466,6 +495,7 @@ public class CluelessServiceImpl implements CluelessService
 		return myConfidentialFile;
 	}
 
+	// clueless/moves 
 	public LegalMovesDTO getLegalMoves(Integer player) {
 		Player p = turnOrder.get(player);
 		Location l = p.getLocation();
@@ -481,7 +511,27 @@ public class CluelessServiceImpl implements CluelessService
 				legalMoveLocations.add(possibleMove);
 			}
 		}
+		// Sort move locations for consistency
+		legalMoveLocations.sort( (a, b) -> {
+			return a.getName().compareTo(b.getName());
+		});
 		dto.setLegalMoves(legalMoveLocations);
 		return dto;
+	}
+	
+	public StatusResponseDTO status(Integer currentPlayer) {
+		List<Player> players = new LinkedList<>();
+		players.addAll(playerNameMapping.values());
+		
+		List<Card> weapons = new LinkedList<>();
+		weapons.addAll(weaponNameMapping.values());
+		
+		StatusResponseDTO dto = new StatusResponseDTO();
+		dto.setCurrentPlayer(turnOrder.get(currentPlayer));
+		dto.setPlayers(players);
+		dto.setWeapons(weapons);
+		return dto;
+		
+		
 	}
 }

@@ -12,6 +12,7 @@ import edu.jhu.clueless.DTO.InitResponseDTO;
 import edu.jhu.clueless.DTO.LegalMovesDTO;
 import edu.jhu.clueless.DTO.MoveRequestDTO;
 import edu.jhu.clueless.DTO.MoveResponseDTO;
+import edu.jhu.clueless.DTO.StatusResponseDTO;
 import edu.jhu.clueless.DTO.SuggestRequestDTO;
 import edu.jhu.clueless.DTO.SuggestResponseDTO;
 
@@ -33,5 +34,7 @@ public interface CluelessService {
     SuggestResponseDTO suggest(SuggestRequestDTO mySuggestRequestDTO) throws IOException, JSONException;
     
     public LegalMovesDTO getLegalMoves(Integer player);
+
+	public StatusResponseDTO status(Integer currentPlayer);
 
 }

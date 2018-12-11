@@ -6,6 +6,7 @@ package edu.jhu.clueless.controllers;
 import java.io.IOException;
 
 import org.json.JSONException;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ import edu.jhu.clueless.DTO.InitResponseDTO;
 import edu.jhu.clueless.DTO.LegalMovesDTO;
 import edu.jhu.clueless.DTO.MoveRequestDTO;
 import edu.jhu.clueless.DTO.MoveResponseDTO;
+import edu.jhu.clueless.DTO.StatusResponseDTO;
 import edu.jhu.clueless.DTO.SuggestRequestDTO;
 import edu.jhu.clueless.DTO.SuggestResponseDTO;
 import edu.jhu.clueless.service.CluelessService;
@@ -50,7 +52,6 @@ public class CluelessController
      * @throws JSONException
      */
     @RequestMapping(method = {RequestMethod.GET}, path = {"/init"})
-//    ResponseEntity<InitResponseDTO> initGame(@RequestBody InitRequestDTO myInitRequestDTO) throws IOException, JSONException
     public String initGame() throws JSONException, IOException
     {
       InitResponseDTO result = myCluelessService.initGame(new InitRequestDTO("TEST"));
@@ -96,7 +97,13 @@ public class CluelessController
     {
       SuggestResponseDTO result = myCluelessService.suggest(mySuggestRequestDTO);
       return ResponseEntity.ok().body(result);
-    }    
+    }
+    
+    @RequestMapping(method = {RequestMethod.GET}, path = {"/status"})
+    ResponseEntity<StatusResponseDTO> status(@RequestParam Integer currentPlayer) {
+    	StatusResponseDTO dto = myCluelessService.status(currentPlayer);
+    	return ResponseEntity.ok(dto);
+    }
     
 
 }

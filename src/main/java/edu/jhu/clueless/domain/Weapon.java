@@ -3,6 +3,8 @@
  */
 package edu.jhu.clueless.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * @author davidbess
  *
@@ -10,6 +12,8 @@ package edu.jhu.clueless.domain;
 public class Weapon extends Card
 {
   private String weaponName;
+//  @JsonProperty
+//  private Room location;
 
   /**
    * No arg constructor
@@ -80,6 +84,14 @@ public class Weapon extends Card
       return false;
     return true;
   }
+
+public String getLocation() {
+	return getLocationString();
+}
+
+public void setLocation(Room location) {
+	this.location = location.getName();
+}
 
   
   

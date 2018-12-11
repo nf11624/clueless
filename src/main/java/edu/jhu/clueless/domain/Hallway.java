@@ -29,6 +29,7 @@ public class Hallway extends Location
 	  this.name = name;
 	  this.position = position;
 	  this.occupied = false;
+	  this.location = name;
   }
 
   public Hallway(Set<Location> connectedLocation,
