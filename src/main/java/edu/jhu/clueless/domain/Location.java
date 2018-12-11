@@ -3,7 +3,9 @@
  */
 package edu.jhu.clueless.domain;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author davidbess
@@ -11,15 +13,16 @@ import java.util.List;
  */
 public abstract class Location extends Card
 {
-  protected List<Location> connectedLocations;
-  protected List<Player> occupyingPlayers;
-  protected boolean isOccupied;
+  protected List<Location> connectedLocations = new LinkedList<>();
+  protected List<Player> occupyingPlayers = new LinkedList<>();
+  protected boolean isOccupied = false;
   
   /*
    * 5 by 5 grid.  rows with rooms are full, 
    * rows with only hallway have some sparsity. 
    */
   protected Pair position; 
+  protected String name;
   
   /**
    * No arg constructor
@@ -146,8 +149,11 @@ public abstract class Location extends Card
   @Override
   public String toString()
   {
-    return "Location [connectedLocation=" + connectedLocations
-        + ", occupyingPlayers=" + occupyingPlayers + ", isOccupied="
+	String connections = connectedLocations.stream().map( l -> l.name).collect( Collectors.joining( ", "));
+	String players = occupyingPlayers.stream().map( l -> l.getPlayerName()).collect( Collectors.joining( ", "));
+		
+    return "Location [connectedLocation=[" + connections
+        + "], occupyingPlayers=[" + players + "], isOccupied="
         + isOccupied + ", position=" + position + "]";
   }
 

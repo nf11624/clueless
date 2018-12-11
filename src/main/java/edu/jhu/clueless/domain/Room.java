@@ -30,6 +30,7 @@ public class Room extends Location
   {
     super(connectedLocation, occupyingPlayers, isOccupied, position);
     this.roomName = roomName;
+    this.name = roomName;
   }
   
   /**
@@ -45,20 +46,10 @@ public class Room extends Location
   public void setRoomName(String roomName)
   {
     this.roomName = roomName;
+    this.name = roomName;
   }
 
   
-  /* (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString()
-  {
-    return "Location [connectedLocation=" + connectedLocations
-        + ", occupyingPlayers=" + occupyingPlayers + ", isOccupied="
-        + isOccupied + ", position=" + position + ", "
-            + "roomName=" + roomName + "]";
-  }
 
 
 

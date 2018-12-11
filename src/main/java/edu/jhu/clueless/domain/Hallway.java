@@ -6,6 +6,7 @@ package edu.jhu.clueless.domain;
 
 import java.util.LinkedList;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author davidbess
@@ -17,6 +18,7 @@ public class Hallway extends Location
   public Hallway()
   {
     super();
+    this.name = "Hallway";
   }
   
   public Hallway(Pair position)
@@ -30,16 +32,7 @@ public class Hallway extends Location
     super(connectedLocation, occupyingPlayers, isOccupied, position);
   }
   
-  /* (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString()
-  {
-    return "Location [connectedLocation=" + connectedLocations
-        + ", occupyingPlayers=" + occupyingPlayers + ", isOccupied="
-        + isOccupied + ", position=" + position.toString() + "]";
-  }
+
   
   
 }

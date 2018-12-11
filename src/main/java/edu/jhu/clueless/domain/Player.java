@@ -5,6 +5,7 @@ package edu.jhu.clueless.domain;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author davidbess
@@ -97,8 +98,10 @@ public class Player extends Card
   @Override
   public String toString()
   {
-    return "Player [playerName=" + playerName + ", location=" + location
-        + ", playerCards=" + playerCards + "]";
+	String cards = playerCards.stream().map( c -> c.getName()).collect( Collectors.joining( ", "));
+			
+    return "Player [playerName=" + playerName + ", location=" + location.name
+        + ", playerCards=[" + cards + "]]";
   }
   
   /* (non-Javadoc)

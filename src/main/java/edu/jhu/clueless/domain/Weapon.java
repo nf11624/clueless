@@ -28,6 +28,7 @@ public class Weapon extends Card
   {
     super();
     this.weaponName = weaponName;
+    this.name = weaponName;
   }
 
   /**
@@ -44,6 +45,7 @@ public class Weapon extends Card
   public void setWeaponName(String weaponName)
   {
     this.weaponName = weaponName;
+    this.name = weaponName;
   }
 
   /* (non-Javadoc)

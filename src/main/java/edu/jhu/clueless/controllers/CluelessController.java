@@ -54,6 +54,7 @@ public class CluelessController
     public String initGame() throws JSONException, IOException
     {
       InitResponseDTO result = myCluelessService.initGame(new InitRequestDTO("TEST"));
+      System.err.println(result.toString());
       return ResponseEntity.ok().body(result).toString();
     }
     
