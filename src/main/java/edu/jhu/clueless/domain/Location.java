@@ -113,6 +113,9 @@ public abstract class Location extends Card
 	 */
 	public void addOccupyingPlayer(Player occupyingPlayer)
 	{
+		if (occupyingPlayer.getLocation() != null) {
+			occupyingPlayer.getLocation().removeOccupyingPlayer(occupyingPlayer);
+		}
 		occupyingPlayers.add(occupyingPlayer);
 		occupyingPlayer.setLocation(this);
 	}

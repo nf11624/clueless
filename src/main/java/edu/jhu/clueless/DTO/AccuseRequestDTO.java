@@ -13,26 +13,25 @@ import edu.jhu.clueless.domain.Weapon;
  */
 public class AccuseRequestDTO
 {
-  private Player accusingPlayer;
-  private Player accusedPlayer;
-  private Room murderScene;
-  private Weapon murderWeapon;
+  private int accusingPlayer;
+  private int accusedPlayer;
+//  private String murderScene;
+  private String murderWeapon;
   
   public AccuseRequestDTO() {}
 
-  public AccuseRequestDTO(Player accusingPlayer, Player accusedPlayer,
-      Room murderScene, Weapon murderWeapon)
+  public AccuseRequestDTO(Integer currentPlayer, Integer targetPlayer,
+      String weapon)
   {
-    this.accusingPlayer = accusingPlayer;
-    this.accusedPlayer = accusedPlayer;
-    this.murderScene = murderScene;
-    this.murderWeapon = murderWeapon;
+    this.accusingPlayer = currentPlayer;
+    this.accusedPlayer = targetPlayer;
+    this.murderWeapon = weapon;
   }
 
   /**
    * @return the accusingPlayer
    */
-  public Player getAccusingPlayer()
+  public int getAccusingPlayer()
   {
     return accusingPlayer;
   }
@@ -40,7 +39,7 @@ public class AccuseRequestDTO
   /**
    * @param accusingPlayer the accusingPlayer to set
    */
-  public void setAccusingPlayer(Player accusingPlayer)
+  public void setAccusingPlayer(int accusingPlayer)
   {
     this.accusingPlayer = accusingPlayer;
   }
@@ -48,7 +47,7 @@ public class AccuseRequestDTO
   /**
    * @return the accusedPlayer
    */
-  public Player getAccusedPlayer()
+  public int getAccusedPlayer()
   {
     return accusedPlayer;
   }
@@ -56,31 +55,31 @@ public class AccuseRequestDTO
   /**
    * @param accusedPlayer the accusedPlayer to set
    */
-  public void setAccusedPlayer(Player accusedPlayer)
+  public void setAccusedPlayer(Integer accusedPlayer)
   {
     this.accusedPlayer = accusedPlayer;
   }
 
-  /**
-   * @return the murderScene
-   */
-  public Room getMurderScene()
-  {
-    return murderScene;
-  }
-
-  /**
-   * @param murderScene the murderScene to set
-   */
-  public void setMurderScene(Room murderScene)
-  {
-    this.murderScene = murderScene;
-  }
+//  /**
+//   * @return the murderScene
+//   */
+//  public Room getMurderScene()
+//  {
+//    return murderScene;
+//  }
+//
+//  /**
+//   * @param murderScene the murderScene to set
+//   */
+//  public void setMurderScene(Room murderScene)
+//  {
+//    this.murderScene = murderScene;
+//  }
 
   /**
    * @return the murderWeapon
    */
-  public Weapon getMurderWeapon()
+  public String getMurderWeapon()
   {
     return murderWeapon;
   }
@@ -88,7 +87,7 @@ public class AccuseRequestDTO
   /**
    * @param murderWeapon the murderWeapon to set
    */
-  public void setMurderWeapon(Weapon murderWeapon)
+  public void setMurderWeapon(String murderWeapon)
   {
     this.murderWeapon = murderWeapon;
   };

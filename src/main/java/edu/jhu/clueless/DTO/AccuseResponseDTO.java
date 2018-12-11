@@ -9,31 +9,31 @@ package edu.jhu.clueless.DTO;
  */
 public class AccuseResponseDTO
 {
-  private boolean isTrue;
+  private boolean correct;
   private String message;
   
   public AccuseResponseDTO() {}
 
   public AccuseResponseDTO(boolean isTrue, String message)
   {
-    this.isTrue = isTrue;
+    this.correct = isTrue;
     this.message = message;
   }
 
   /**
    * @return the isTrue
    */
-  public boolean isTrue()
+  public boolean isCorrect()
   {
-    return isTrue;
+    return correct;
   }
 
   /**
    * @param isTrue the isTrue to set
    */
-  public void setTrue(boolean isTrue)
+  public void setCorrect(boolean isTrue)
   {
-    this.isTrue = isTrue;
+    this.correct = isTrue;
   }
 
   /**

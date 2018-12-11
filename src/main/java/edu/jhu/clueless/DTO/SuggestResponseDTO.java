@@ -11,6 +11,7 @@ public class SuggestResponseDTO
 {
   private String result;
   private String cardRevealMessage;
+  private boolean correct = false;
   
   public SuggestResponseDTO() {};
   
@@ -47,6 +48,14 @@ public class SuggestResponseDTO
   {
     this.cardRevealMessage = cardRevealMessage;
   }
+
+public boolean isCorrect() {
+	return correct;
+}
+
+public void setCorrect(boolean correct) {
+	this.correct = correct;
+}
   
   
   

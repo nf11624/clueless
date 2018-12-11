@@ -86,14 +86,14 @@ public class CluelessController
     }
     
     @PostMapping("/accuse")
-    ResponseEntity<AccuseResponseDTO> move(AccuseRequestDTO myAccuseRequestDTO) throws IOException, JSONException 
+    ResponseEntity<AccuseResponseDTO> accuse(AccuseRequestDTO myAccuseRequestDTO) throws IOException, JSONException 
     {
       AccuseResponseDTO result = myCluelessService.accuse(myAccuseRequestDTO);
       return ResponseEntity.ok().body(result);
     }
     
     @PostMapping("/suggest")
-    ResponseEntity<SuggestResponseDTO> move(SuggestRequestDTO mySuggestRequestDTO) throws IOException, JSONException 
+    ResponseEntity<SuggestResponseDTO> suggest(AccuseRequestDTO mySuggestRequestDTO) throws IOException, JSONException 
     {
       SuggestResponseDTO result = myCluelessService.suggest(mySuggestRequestDTO);
       return ResponseEntity.ok().body(result);

@@ -31,7 +31,7 @@ public interface CluelessService {
     
     AccuseResponseDTO accuse(AccuseRequestDTO myAccuseRequestDTO) throws IOException, JSONException;
     
-    SuggestResponseDTO suggest(SuggestRequestDTO mySuggestRequestDTO) throws IOException, JSONException;
+    SuggestResponseDTO suggest(AccuseRequestDTO mySuggestRequestDTO) throws IOException, JSONException;
     
     public LegalMovesDTO getLegalMoves(Integer player);
 

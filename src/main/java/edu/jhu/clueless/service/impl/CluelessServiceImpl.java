@@ -163,7 +163,7 @@ public class CluelessServiceImpl implements CluelessService
 		conservatory = new Room("Conservatory", new Pair(4, 0));
 		conservatoryBallRoomHallway = new Hallway("Conservatory - Ball Room Hallway", new Pair(4, 1));   
 		kitchen = new Room("Kitchen", new Pair(4, 4));
-		
+
 		// Add locations to weapons
 		knife.setLocation(kitchen);
 		rope.setLocation(hall);
@@ -171,10 +171,10 @@ public class CluelessServiceImpl implements CluelessService
 		leadPipe.setLocation(library);
 		wrench.setLocation(diningRoom);
 		revolver.setLocation(study);
-		
+
 		/*****
 		// Player initialization
-		*/
+		 */
 		List<Card> missScarletCardSet = new LinkedList<Card>();
 		missScarletCardSet.add(kitchen);
 		missScarletCardSet.add(conservatory);
@@ -218,7 +218,7 @@ public class CluelessServiceImpl implements CluelessService
 		mrsPeacock.setPlayerCards(mrsPeacockCardSet);
 		playerNameMapping.put(mrsPeacock.getPlayerName(), mrsPeacock);
 		libraryConservatoryHallway.addOccupyingPlayer(mrsPeacock);
-	
+
 		/*
 		 * Fifth row
 		 */
@@ -246,7 +246,7 @@ public class CluelessServiceImpl implements CluelessService
 		ballRoom.addConnectedLocation(ballRoomKitchenHallway);
 		ballRoom.addConnectedLocation(billiardRoomBallRoomHallway);
 		ballRoom.addConnectedLocation(conservatoryBallRoomHallway);
-		
+
 		conservatory.addConnectedLocation(conservatoryBallRoomHallway);
 		conservatory.addConnectedLocation(libraryConservatoryHallway);
 		conservatory.addConnectedLocation(lounge);
@@ -264,11 +264,11 @@ public class CluelessServiceImpl implements CluelessService
 
 		lounge.addConnectedLocation(loungediningRoomHallway);
 		lounge.addConnectedLocation(hallLoungeHallway);
-		
+
 		diningRoom.addConnectedLocation(loungediningRoomHallway);
 		diningRoom.addConnectedLocation(diningRoomKitchenHallway);
 		diningRoom.addConnectedLocation(billiarddiningRoomHallway);
-		
+
 		billiardRoom.addConnectedLocation(billiardRoomBallRoomHallway);
 		billiardRoom.addConnectedLocation(billiarddiningRoomHallway);
 		billiardRoom.addConnectedLocation(librarybilliardRoomHallway);
@@ -302,7 +302,7 @@ public class CluelessServiceImpl implements CluelessService
 		// kitchen
 		locationNameMapping.put(diningRoomKitchenHallway.getName(), loungediningRoomHallway);
 		locationNameMapping.put(ballRoomKitchenHallway.getName(), loungediningRoomHallway);
-		
+
 
 		weaponNameMapping.put(revolver.getWeaponName(), revolver);
 		weaponNameMapping.put(candlestick.getWeaponName(), candlestick);
@@ -353,19 +353,19 @@ public class CluelessServiceImpl implements CluelessService
 
 		MoveResponseDTO response = new MoveResponseDTO("Initial Response");
 
-//		// Determine if the move lands the player on the board
-//		if (requestedLocation == null)
-//		{
-//			response.setMessage("The requested direction is invalid given your position.");
-//			return response;
-//		}
+		//		// Determine if the move lands the player on the board
+		//		if (requestedLocation == null)
+		//		{
+		//			response.setMessage("The requested direction is invalid given your position.");
+		//			return response;
+		//		}
 
-//		// Check if the requested direction is occupied
-//		if (requestedLocation.isOccupied())
-//		{
-//			response.setMessage("The requested location is currently occupied by another player.");
-//			return response;
-//		}
+		//		// Check if the requested direction is occupied
+		//		if (requestedLocation.isOccupied())
+		//		{
+		//			response.setMessage("The requested location is currently occupied by another player.");
+		//			return response;
+		//		}
 
 		// The move is valid and the location is not occupied so we may move the player
 		currentLocation.removeOccupyingPlayer(player);
@@ -447,39 +447,54 @@ public class CluelessServiceImpl implements CluelessService
 	public AccuseResponseDTO accuse(AccuseRequestDTO myAccuseRequestDTO)
 			throws IOException, JSONException
 	{
-		// TODO Auto-generated method stub
-		return null;
+		AccuseResponseDTO outgoingDTO = new AccuseResponseDTO();
+		SuggestResponseDTO resp = suggest(myAccuseRequestDTO);
+		if (resp.isCorrect()) {
+			outgoingDTO.setCorrect(resp.isCorrect());
+			outgoingDTO.setMessage("YOU WIN");
+		}
+		else {
+			outgoingDTO.setCorrect(false);
+			outgoingDTO.setMessage("You failed to find the murderer");
+		}
+		return outgoingDTO;
 	}
 
 	@Override
-	public SuggestResponseDTO suggest(SuggestRequestDTO mySuggestRequestDTO)
+	public SuggestResponseDTO suggest(AccuseRequestDTO mySuggestRequestDTO)
 			throws IOException, JSONException
 	{
+		SuggestResponseDTO mySuggestResponseDTO = new SuggestResponseDTO();
 		ConfidentialFile suggestion = new ConfidentialFile();
 
-		Player suggestedPlayer = playerNameMapping.get(mySuggestRequestDTO.getSuggestedPlayerName());
+		Player currentPlayer = turnOrder.get(mySuggestRequestDTO.getAccusingPlayer());
+		Player suggestedPlayer = turnOrder.get(mySuggestRequestDTO.getAccusedPlayer());
 		suggestion.setMurderingPlayer(suggestedPlayer);
 
-		Room suggestedRoom = (Room) locationNameMapping.get(mySuggestRequestDTO.getSuggestedRoomName());
-		suggestion.setMurderLocation(suggestedRoom);
-
-		Weapon suggestedWeapon = weaponNameMapping.get(mySuggestRequestDTO.getSuggestedWeaponName());
-		suggestion.setMurderWeapon(suggestedWeapon);
-
-		SuggestResponseDTO mySuggestResponseDTO = new SuggestResponseDTO();
-
-		if(suggestion.getMurderingPlayer().getPlayerName() == myConfidentialFile.getMurderingPlayer().getPlayerName() &&
-				suggestion.getMurderLocation().getRoomName() == myConfidentialFile.getMurderLocation().getRoomName() && 
-				suggestion.getMurderWeapon().getWeaponName() == myConfidentialFile.getMurderWeapon().getWeaponName())
-		{
-			mySuggestResponseDTO.setResult("true");
-			mySuggestResponseDTO.setCardRevealMessage("No cards revealed");
-		}
-		else
-		{
-			mySuggestResponseDTO.setResult("false");
+		if (!(currentPlayer.getLocation() instanceof Room)) {
+			mySuggestResponseDTO.setResult("Cannot make a suggestion from a non-Room.");
 		}
 
+		else {
+			Room suggestedRoom = (Room) currentPlayer.getLocation();
+			suggestedRoom.addOccupyingPlayer(suggestedPlayer);
+			suggestion.setMurderLocation(suggestedRoom);
+
+			Weapon suggestedWeapon = weaponNameMapping.get(mySuggestRequestDTO.getMurderWeapon());
+			suggestion.setMurderWeapon(suggestedWeapon);
+
+			if(suggestion.getMurderingPlayer().getPlayerName() == myConfidentialFile.getMurderingPlayer().getPlayerName() &&
+					suggestion.getMurderLocation().getRoomName() == myConfidentialFile.getMurderLocation().getRoomName() && 
+					suggestion.getMurderWeapon().getWeaponName() == myConfidentialFile.getMurderWeapon().getWeaponName())
+			{
+				mySuggestResponseDTO.setResult("true");
+				mySuggestResponseDTO.setCardRevealMessage("No cards revealed");
+			}
+			else
+			{
+				mySuggestResponseDTO.setResult("false");
+			}
+		}
 		return mySuggestResponseDTO;
 	}
 
@@ -518,20 +533,20 @@ public class CluelessServiceImpl implements CluelessService
 		dto.setLegalMoves(legalMoveLocations);
 		return dto;
 	}
-	
+
 	public StatusResponseDTO status(Integer currentPlayer) {
 		List<Player> players = new LinkedList<>();
 		players.addAll(playerNameMapping.values());
-		
+
 		List<Card> weapons = new LinkedList<>();
 		weapons.addAll(weaponNameMapping.values());
-		
+
 		StatusResponseDTO dto = new StatusResponseDTO();
 		dto.setCurrentPlayer(turnOrder.get(currentPlayer));
 		dto.setPlayers(players);
 		dto.setWeapons(weapons);
 		return dto;
-		
-		
+
+
 	}
 }
